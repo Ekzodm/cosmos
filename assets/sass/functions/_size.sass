@@ -1,0 +1,16 @@
+@use "sass:math"
+  
+@function em($new_px, $base_px)
+  @return math.div(math.floor(math.div($new-px, $base-px) * 1000), 1000) + em
+
+@function font($fz, $lh, $fw, $ff)
+  @return $fw math.div(math.floor(math.div($fz, 16) * 100), 100) + em / math.div(math.floor(math.div($lh, $fz) * 1000), 1000) + em $ff
+
+@function percent($el, $max)
+  @return math.div($el, $max) * 100%
+
+@function vw($el, $max)
+  @return calc($el / $max)
+
+@function media_fz($mobile_resolution, $base_resolution, $mobile_fz, $base_fz)
+  @return calc((100vw - $mobile_resolution * 1px) / ($base_resolution - $mobile_resolution) * ($base_fz - $mobile_fz) + $mobile_fz * 1px)

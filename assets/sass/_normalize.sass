@@ -1,0 +1,115 @@
+html
+	font-size: 16px
+	line-height: 1.5em
+	color: #000
+	font-family: 'RobotoFlex', sans-serif
+	font-style: normal
+	font-weight: normal
+	-webkit-tap-highlight-color: transparent
+	-webkit-font-smoothing: antialiased
+	overflow-x: hidden
+	width: 100vw
+	&.scroll
+		width: calc(100% - 5px)
+		overflow: hidden
+
+body
+	position: relative
+	display: flex
+	flex-direction: column
+	z-index: 1
+	min-height: 100vh
+	background: $body
+	width: 100vw
+	&::-webkit-scrollbar
+		width: 5px
+	&::-webkit-scrollbar-track
+		background: transparent
+		width: 5px
+	&::-webkit-scrollbar-thumb
+		background: red
+		width: 5px
+		border-radius: 5px
+
+#app,
+.page
+	display: flex
+	flex-direction: column
+	min-height: 100vh
+	
+*,
+::after,
+::before
+	box-sizing: border-box
+	padding: 0
+	margin: 0
+
+button,
+input,
+select,
+textarea
+	border: 0
+	background: transparent
+	&:focus
+		outline: none
+
+textarea
+	resize: none
+
+input[type='text'],
+textarea
+	background-clip: padding-box
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button
+	-webkit-appearance: none
+	margin: 0
+
+input[type='number']
+	-moz-appearance: textfield
+
+button
+	cursor: pointer
+
+ul
+	list-style: none
+
+a
+	text-decoration: none
+	cursor: pointer
+
+b,
+strong
+	font-weight: 700
+
+img
+	display: block
+
+.container,
+.container-column
+	display: flex
+
+.container,
+.container-column
+	max-width: $max-width
+	width: 100%
+	margin: 0 auto
+	padding: 0 20px	
+	z-index: 2
+	position: relative
+
+.container-column
+	flex-direction: column
+
+section
+	position: relative
+
+main
+	flex: 1
+
+.fade-enter-active,
+.fade-leave-active
+	transition: opacity .3s
+.fade-enter-from,
+.fade-leave-to
+	opacity: 0
