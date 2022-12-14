@@ -4,6 +4,8 @@ section.quote
     .quote-block(:class='payload?.class')
       .quote-background
         img(:src='payload?.background')
+      .quote-meteor
+        img(:src='payload?.meteor')
       .quote-image
         img(:src='payload?.image')
       .quote-wrapper
@@ -41,6 +43,9 @@ const props = defineProps({
           img
             left: 0
             width: inherit
+        &-meteor
+          top: em(-24, 16)
+          right: em(-36, 16)
         &-wrapper
           order: 2
           max-width: em(554, 16)
@@ -52,6 +57,9 @@ const props = defineProps({
           img
             right: 0
             width: em(841, 16)
+        &-meteor
+          top: 0
+          left: em(-100, 16)
         &-wrapper
           order: 1
           max-width: em(705, 16)
@@ -65,6 +73,8 @@ const props = defineProps({
     img
       position: absolute
       bottom: 0
+  &-meteor
+    position: absolute
   &-wrapper
     display: flex
     flex-direction: column

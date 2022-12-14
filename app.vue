@@ -2,17 +2,17 @@
 main.main 
   BannerEl
   DescriptionEl
-  QuoteEl(:payload='{ name: "Андрей Борисенко", description: "летчик-космонавт, Герой России (2012). В 1987 году окончил ленинградский «Военмех», в 2003-2021-х входил в отряд космонавтов. Дважды участвовал в полетах к Международной космической станции.", background: quote_background_1, image: quote_media_1, class: "first" }')
-  ArticlesEl(:tab='tab_1' :background='background_1_1' v-if='article_1')
+  QuoteEl(:payload='{ name: "Андрей Борисенко", description: "летчик-космонавт, Герой России (2012). В 1987 году окончил ленинградский «Военмех», в 2003-2021-х входил в отряд космонавтов. Дважды участвовал в полетах к Международной космической станции.", background: quote_background_1, image: quote_media_1, class: "first", meteor: quote_meteor_1 }')
+  ArticlesLinkEl(:tab='tab_1' :background='background_1_1' v-if='article_1' :active='0' id='star')
     template(v-slot:content_1)
       ArticlesTextEl(:data='article_1?.content_1')
     template(v-slot:media_1)
       ArticlesMediaEl(:image='media_1_1')
-  QuoteEl(:payload='{ name: "Александр Угрюмов", description: "руководитель блока по разработке трудноизвлекаемых запасов «Газпромнефть-Технологических партнерств». С отличием окончил геологический факультет РГУ нефти и газа имени И. М. Губкина. Имеет две магистерские степени по разработке месторождений Университета Хериота-Уатта (Эдинбург, Шотландия). Работал в ведущих российских и международных нефтегазовых компаниях.", background: quote_background_2, image: quote_media_2, class: "second" }')
-  ArticlesEl(:tab='tab_1' :background_2='background_1_2' v-if='article_1')
-    template(v-slot:content_2)
+  QuoteEl(:payload='{ name: "Александр Угрюмов", description: "руководитель блока по разработке трудноизвлекаемых запасов «Газпромнефть-Технологических партнерств». С отличием окончил геологический факультет РГУ нефти и газа имени И. М. Губкина. Имеет две магистерские степени по разработке месторождений Университета Хериота-Уатта (Эдинбург, Шотландия). Работал в ведущих российских и международных нефтегазовых компаниях.", background: quote_background_2, image: quote_media_2, class: "second", meteor: quote_meteor_2 }')
+  ArticlesLinkEl(:tab='tab_1' :background_2='background_1_2' v-if='article_1' :active='1' id='bosom')
+    template(v-slot:content_1)
       ArticlesTextEl(:data='article_1?.content_2')
-    template(v-slot:media_2)
+    template(v-slot:media_1)
       ArticlesMediaEl(:image='media_1_2')
   DelimiterEl(title='Цели')
     .delimiter-background
@@ -41,7 +41,7 @@ main.main
   DelimiterEl(title='Подготовка')
     .delimiter-background
       img(src='@/assets/images/delimiter3.png')
-  ArticlesEl(:tab='tab_4' v-if='article_4')
+  ArticlesEl(:tab='tab_4' :background='background_4_1' v-if='article_4')
     template(v-slot:content_1)
       ArticlesTextEl(:data='article_4["content_1"]')
     template(v-slot:media_1)
@@ -65,7 +65,7 @@ main.main
   DelimiterEl(title='Ключи')
     .delimiter-background
       img(src='@/assets/images/delimiter5.png')
-  ArticlesEl(:tab='tab_6' v-if='article_6')
+  ArticlesEl(:tab='tab_6' :background='background_6_1' v-if='article_6')
     template(v-slot:content_1)
       ArticlesTextEl(:data='article_6["content_1"]')
     template(v-slot:media_1)
@@ -90,11 +90,15 @@ import quote_background_1 from '@/assets/images/quote_background_1.png'
 import quote_background_2 from '@/assets/images/quote_background_2.png'
 import quote_media_1 from '@/assets/images/quote_media_1.png'
 import quote_media_2 from '@/assets/images/quote_media_2.png'
+import quote_meteor_1 from '@/assets/images/quote_meteor_1.png'
+import quote_meteor_2 from '@/assets/images/quote_meteor_2.png'
 
 // Background Articles
 import background_1_1 from '@/assets/images/background_1_1.png'
 import background_1_2 from '@/assets/images/background_1_2.png'
 import background_2_1 from '@/assets/images/article_2_1.png'
+import background_4_1 from '@/assets/images/background_4_1.png'
+import background_6_1 from '@/assets/images/background_6_1.png'
 
 // JSON Articles
 import article_1 from '@/assets/json/article_1.json'
