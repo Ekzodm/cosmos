@@ -2,21 +2,42 @@
 .articles-progress(:style='{ width: percent }')
 .articles-text(@scroll='progress')
   .articles-text_item(v-html='data' ref='content' )
+ArticlesPromtEl(:payload='promt_search' :params='params')
 </template>
 
 <script setup>
 
-import { ref } from 'vue'
-
+import { ref, onMounted } from 'vue'
 const props = defineProps({
-  data: { type: String, default: '' }
+  data: { type: String, default: '' },
+  promt: { type: Object, default: {} }
 })
 const content = ref(null)
 const percent = ref('0%')
+const promt_search = ref({})
+const params = ref({})
 const progress = (e) => {
   const { offsetHeight, scrollHeight, scrollTop } = e.target
   percent.value = `${Math.floor(scrollTop * 100 / ((scrollHeight - offsetHeight) * 2))}%`
 }
+
+const prompt_select = () => {
+  const prompt_array = content.value.querySelectorAll('.promt')
+  for(const i of prompt_array) {
+    i.addEventListener('mouseover', e => {
+      console.log(e)
+      params.value = { x: e.layerX, y: e.layerY, visible: true}
+      promt_search.value = props.promt.promt.filter(x => x.search.indexOf(e.target.textContent.toLowerCase()) > -1)[0]
+    })
+  }
+  for(const i of prompt_array) {
+    i.addEventListener('mouseout', e => {
+      params.value.visible = false
+    })
+  }
+}
+onMounted(() => prompt_select())
+
 
 </script>
 
@@ -43,6 +64,14 @@ const progress = (e) => {
         display: block
         & + span
           margin-top: em(32, 22)
+    :deep(.promt)
+      color: $orange
+      background: rgba(224, 116, 56, .1)
+      padding: 0 em(8, 22)
+      border-radius: em(6, 22)
+      display: inline-block
+      cursor: pointer
+      z-index: 15
     :deep(.active)
       background: $text_active
       padding: em(32, 24)
