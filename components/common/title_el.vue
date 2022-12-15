@@ -25,4 +25,10 @@ const props = defineProps({
     letter-spacing: em(3.2, 160)
     text-align: center
     text-transform: uppercase
+  @media only screen and (max-width: 1920px)
+    *
+      font-size: media_fz(998, 1920, 120, 160)
+  @media only screen and (max-width: 998px)
+    *
+      font-size: em(120, 16)
 </style>

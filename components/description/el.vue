@@ -35,5 +35,9 @@ section.description
     p
       font: font(32, 42, 400, 'PT Mono')
       color: $white
+  @media only screen and (max-width: 1920px)
+    font-size: media_fz(998, 1920, 14, 16)
+  @media only screen and (max-width: 998px)
+    font-size: em(14, 16)
   
 </style>

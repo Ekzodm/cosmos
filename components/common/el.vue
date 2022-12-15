@@ -1,5 +1,4 @@
 <template lang="pug">
-h1
 ArticlesEl(:tab='payload?.tab' :background='payload?.background' :active='tab' @progress='toggle_index')
   template(v-slot:content_1)
     ArticlesTextEl(:data='payload?.article?.content_1' :promt='payload?.promt' @change='change_tab' :progressItem='progress_tab')

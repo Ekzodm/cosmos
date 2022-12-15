@@ -33,13 +33,14 @@ const props = defineProps({
     display: flex
     align-items: center
     border-radius: em(48, 16)
+    height: em(780, 16)
+    padding: em(20, 16) em(145, 16)
     &.first
-      padding: em(206, 16) em(145, 16)
       .quote
         &-image
           order: 1
           display: flex
-          width: em(949, 16)
+          width: 50.21vw
           img
             left: 0
             width: inherit
@@ -50,13 +51,14 @@ const props = defineProps({
           order: 2
           max-width: em(554, 16)
     &.second
-      padding: em(146, 16) em(145, 16)
       .quote
         &-image
           order: 2
+          display: flex
+          width: 44.45vw
           img
             right: 0
-            width: em(841, 16)
+            width: inherit
         &-meteor
           top: 0
           left: em(-100, 16)
@@ -69,6 +71,8 @@ const props = defineProps({
     left: 0
     width: 100%
     height: 100%
+    img
+      width: 100%
   &-image
     img
       position: absolute
@@ -89,5 +93,9 @@ const props = defineProps({
       color: $white
       font: font(28, 40, 400, 'Roboto Flex')
       margin-top: em(24, 28)
+  @media only screen and (max-width: 1920px)
+    font-size: media_fz(998, 1920, 14, 16)
+    &-block
+      height: media_fz(998, 1920, 450, 780)
 
 </style>

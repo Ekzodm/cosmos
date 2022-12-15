@@ -39,6 +39,14 @@ onMounted(() => {
 </script>
 
 <style lang="sass" scoped>
+.articles-media
+  width: 100%
+  height: 100%
+  margin-left: em(20, 16)
+  img
+    width: inherit
+    height: 100%
+    object-fit: contain
 .animate1
   animation: media1 20s linear infinite
   position: relative

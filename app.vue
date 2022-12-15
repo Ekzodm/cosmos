@@ -1,5 +1,5 @@
 <template lang="pug">
-main.main 
+main.main
   BannerEl
   DescriptionEl
   QuoteEl(:payload='{ name: "Андрей Борисенко", description: "летчик-космонавт, Герой России (2012). В 1987 году окончил ленинградский «Военмех», в 2003-2021-х входил в отряд космонавтов. Дважды участвовал в полетах к Международной космической станции.", background: quote_background_1, image: quote_media_1, class: "first", meteor: quote_meteor_1 }')
@@ -38,7 +38,7 @@ main.main
 
 <script setup>
 
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const tab_1 = [{ to: 'star', title: 'На пути к звёздам' }, { to: 'bosom', title: 'На пути к недрам' }]
 const tab_2 = [{ title: 'Цели для полёта' }, { title: 'Цели для бурения' }]
@@ -122,6 +122,7 @@ const payload_6 = ref({
   media: [{ item: media_6_1, type: 'image' },{ item: media_6_2, type: 'image' }],
   promt: promt
 })
+
 </script>
 
 <style lang="sass" scoped>

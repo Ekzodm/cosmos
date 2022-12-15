@@ -41,6 +41,7 @@ const tab_value = data => {
 .articles
   height: 100vh
   position: relative
+  overflow: hidden
   &-wrapper
     display: flex
     align-items: center
@@ -52,6 +53,7 @@ const tab_value = data => {
       display: flex
       justify-content: center
       width: 50%
+      height: 100%
   &-background
     position: absolute
     z-index: -1

@@ -15,6 +15,13 @@ const props = defineProps({
 </script>
 
 <style lang="sass" scoped>
+.articles-media
+  width: 100%
+  height: 90%
+  img
+    width: inherit
+    height: 90%
+    object-fit: contain
 .animate1
   animation: 10s infiniti linear media_1
 

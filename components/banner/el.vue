@@ -1,12 +1,51 @@
 <template lang="pug">
-section.banner
+section.banner(ref='observe')
   .banner-background
     img(src='@/assets/images/banner.png' alt='background')
-  .banner-satellite
+  .banner-satellite(:style='{transform: `translateX(${satellite}px)`}')
     img(src='@/assets/images/satellite.png' alt='satellite')
   .container-column
-    CommonTitleEl(:banner='true' title='Через недра в космос') 
+    .banner-title(:style='{ transform: `scale(${transform})`, filter: `blur(${filter}px)` }')
+      CommonTitleEl(:banner='true' title='Через недра в космос') 
 </template>
+
+<script setup>
+
+import { ref } from 'vue'
+
+const observe = ref(null)
+const transform = ref(1)
+const filter = ref(0)
+const satellite = ref(0)
+
+const threshold_list = () => {
+  let thresholds = []
+  let numSteps = 100
+  for (let i=1.0; i<=numSteps; i++) {
+    let ratio = i/numSteps
+    thresholds.push(ratio)
+  }
+  thresholds.push(0)
+  return thresholds;
+}
+const options = {
+    root: null,
+    rootMargin: '5px',
+    threshold: threshold_list()
+}
+onMounted(() => {
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      const ratio = 1 - entry.intersectionRatio
+      transform.value = 1 + ratio * 2
+      filter.value = 0 + ratio * 10
+      satellite.value = 0 + ratio * 500
+    })
+  }, options)
+  !!observe.value && observer.observe(observe.value)
+})
+
+</script>
 
 <style lang="sass" scoped>
 .banner
