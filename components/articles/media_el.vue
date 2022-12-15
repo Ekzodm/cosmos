@@ -27,9 +27,9 @@ onMounted(() => {
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        anim.value.play()
+        !!anim.value && anim.value.play()
       } else {
-        anim.value.stop()
+        !!anim.value && anim.value.stop()
       }
     })
   }, options)

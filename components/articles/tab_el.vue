@@ -6,16 +6,19 @@ nav.articles-nav
 
 <script setup>
 
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 const emit = defineEmits(['change'])
 const props = defineProps({
-  tab: { type: Array, default: [] }
+  tab: { type: Array, default: [] },
+  activeIndex: { type: Number, default: 0 }
 })
 const active = ref(0)
 const change_button = idx => {
   active.value = idx
+  console.log(active.value)
   emit('change', idx)
 }
+watch(() => props.activeIndex, () => change_button(props.activeIndex), { deep: true, immediate: true })
 
 </script>
 

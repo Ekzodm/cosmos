@@ -17,66 +17,28 @@ main.main
   DelimiterEl(title='Цели')
     .delimiter-background
       img(src='@/assets/images/delimiter1.png')
-  ArticlesEl(:tab='tab_2' :background='background_2_1' v-if='article_2')
-    template(v-slot:content_1)
-      ArticlesTextEl(:data='article_2["content_1"]' :promt='promt')
-    template(v-slot:media_1)
-      ArticlesMediaEl(:media='media_2_1')
-    template(v-slot:content_2)
-      ArticlesTextEl(:data='article_2["content_2"]' :promt='promt')  
-    template(v-slot:media_2)
-      ArticlesMediaEl(:media='media_2_2')
+  CommonEl(:payload='payload_2' v-if='article_2')
   DelimiterEl(title='Управление')
     .delimiter-background
       img(src='@/assets/images/delimiter2.png')
-  ArticlesEl(:tab='tab_3' v-if='article_3')
-    template(v-slot:content_1)
-      ArticlesTextEl(:data='article_3["content_1"]' :promt='promt')
-    template(v-slot:media_1)
-      ArticlesMediaEl(:media='media_3_1')
-    template(v-slot:content_2)
-      ArticlesTextEl(:data='article_3["content_2"]' :promt='promt')
-    template(v-slot:media_2)
-      ArticlesMediaEl(:media='media_3_2')
+  CommonEl(:payload='payload_3' v-if='article_3')
   DelimiterEl(title='Подготовка')
     .delimiter-background
       img(src='@/assets/images/delimiter3.png')
-  ArticlesEl(:tab='tab_4' :background='background_4_1' v-if='article_4')
-    template(v-slot:content_1)
-      ArticlesTextEl(:data='article_4["content_1"]' :promt='promt')
-    template(v-slot:media_1)
-      ArticlesMediaEl(:media='media_4_1' type='animation')
-    template(v-slot:content_2)
-      ArticlesTextEl(:data='article_4["content_2"]' :promt='promt')
-    template(v-slot:media_2)
-      ArticlesMediaEl(:media='media_4_2')
+  CommonEl(:payload='payload_4' v-if='article_4')
   DelimiterEl(title='Полёты: вверх и вниз')
     .delimiter-background
       img(src='@/assets/images/delimiter4.png')
-  ArticlesEl(:tab='tab_5' v-if='article_5')
-    template(v-slot:content_1)
-      ArticlesTextEl(:data='article_5["content_1"]' :promt='promt')
-    template(v-slot:media_1)
-      ArticlesMediaEl(:media='media_5_1')
-    template(v-slot:content_2)
-      ArticlesTextEl(:data='article_5["content_2"]' :promt='promt')
-    template(v-slot:media_2)
-      ArticlesMediaEl(:media='media_5_2')
+  CommonEl(:payload='payload_5' v-if='article_5')
   DelimiterEl(title='Ключи')
     .delimiter-background
       img(src='@/assets/images/delimiter5.png')
-  ArticlesEl(:tab='tab_6' :background='background_6_1' v-if='article_6')
-    template(v-slot:content_1)
-      ArticlesTextEl(:data='article_6["content_1"]' :promt='promt')
-    template(v-slot:media_1)
-      ArticlesMediaEl(:media='media_6_1')
-    template(v-slot:content_2)
-      ArticlesTextEl(:data='article_6["content_2"]' :promt='promt')
-    template(v-slot:media_2)
-      ArticlesMediaEl(:media='media_6_2')
+  CommonEl(:payload='payload_6' v-if='article_6')
 </template>
 
 <script setup>
+
+import { ref } from 'vue'
 
 const tab_1 = [{ to: 'star', title: 'На пути к звёздам' }, { to: 'bosom', title: 'На пути к недрам' }]
 const tab_2 = [{ title: 'Цели для полёта' }, { title: 'Цели для бурения' }]
@@ -124,6 +86,42 @@ import media_6_2 from '@/assets/images/media_6_2.png'
 
 // Promt
 import promt from '@/assets/json/promt.json'
+
+// Payload Article
+
+const payload_2 = ref({
+  tab: tab_2,
+  background: background_2_1,
+  article: article_2,
+  media: [media_2_1, media_2_2],
+  promt: promt
+})
+const payload_3 = ref({
+  tab: tab_3,
+  article: article_3,
+  media: [media_3_1, media_3_2],
+  promt: promt
+})
+const payload_4 = ref({
+  tab: tab_4,
+  background: background_4_1,
+  article: article_4,
+  media: [media_4_1, media_4_2],
+  promt: promt
+})
+const payload_5 = ref({
+  tab: tab_5,
+  article: article_5,
+  media: [media_5_1, media_5_2],
+  promt: promt
+})
+const payload_6 = ref({
+  tab: tab_6,
+  background: background_6_1,
+  article: article_6,
+  media: [media_6_1, media_6_2],
+  promt: promt
+})
 </script>
 
 <style lang="sass" scoped>

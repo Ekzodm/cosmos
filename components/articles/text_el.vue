@@ -12,13 +12,15 @@ const props = defineProps({
   data: { type: String, default: '' },
   promt: { type: Object, default: {} }
 })
+const emit = defineEmits(['change'])
 const content = ref(null)
 const percent = ref('0%')
 const promt_search = ref({})
 const params = ref({})
 const progress = (e) => {
   const { offsetHeight, scrollHeight, scrollTop } = e.target
-  percent.value = `${Math.floor(scrollTop * 100 / ((scrollHeight - offsetHeight) * 2))}%`
+  percent.value = `${Math.ceil(scrollTop * 100 / ((scrollHeight - offsetHeight) * 2))}%`
+  percent.value === '50%' && emit('change', 1)
 }
 
 const prompt_select = () => {

@@ -1,6 +1,6 @@
 <template lang="pug">
 section.articles
-  ArticlesTabEl(:tab='tab' @change='tab_value' :percent='percent')
+  ArticlesTabEl(:tab='tab' @change='tab_value' :activeIndex='active')
   transition(name='fade' mode='out-in')
     .articles-wrapper(v-if='index === 0')
       .articles-background(v-if='!!background')
@@ -25,7 +25,8 @@ import { ref } from 'vue'
 const props = defineProps({
   tab: { type: Array, default: [] },
   percent: { type: String, default: '0%' },
-  background: { type: String, default: '' }
+  background: { type: String, default: '' },
+  active: { type: Number, default: 0 }
 })
 const index = ref(0)
 const tab_value = data => index.value = data
