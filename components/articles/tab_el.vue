@@ -37,5 +37,9 @@ watch(() => props.activeIndex, () => change_button(props.activeIndex), { deep: t
       cursor: pointer
       &.active
         color: $white
+  @media only screen and (max-width: 576px)
+    &_list
+      &-item
+        font: font(14, 24, 400, 'Roboto Flex')
 
 </style>

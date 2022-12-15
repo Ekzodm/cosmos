@@ -39,5 +39,15 @@ section.description
     font-size: media_fz(998, 1920, 14, 16)
   @media only screen and (max-width: 998px)
     font-size: em(14, 16)
+  @media only screen and (max-width: 768px)
+    padding: em(93, 16) 0
+    .container
+      height: auto
+  @media only screen and (max-width: 576px)
+    font-size: 1em
+    &-content
+      p
+        font: font(18, 26, 400, 'PT Mono')
+
   
 </style>

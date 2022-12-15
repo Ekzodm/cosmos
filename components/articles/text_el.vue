@@ -98,4 +98,11 @@ onMounted(() => prompt_select())
         color: $white
         display: block
         max-width: em(275, 18)
+  @media only screen and (max-width: 576px)
+    &-text
+      max-width: 100%
+      max-height: none
+      :deep(.active)
+        padding: em(20, 16)
+        font: font(18, 24, 400, 'PT Mono')
 </style>

@@ -97,5 +97,60 @@ const props = defineProps({
     font-size: media_fz(998, 1920, 14, 16)
     &-block
       height: media_fz(998, 1920, 450, 780)
-
+  @media only screen and (max-width: 768px)
+    font-size: em(14, 16)
+  @media only screen and (max-width: 576px)
+    .container
+      padding: 0
+      height: auto
+    &-block
+      height: auto
+      flex-direction: column
+      border-radius: 0
+      padding: 0 em(20, 16) 1em
+      &.first,
+      &.second
+        .quote
+          &-wrapper
+            max-width: 100%
+            background: $body
+            border-radius: em(8, 16)
+            padding: em(20, 16)
+          &-image
+            width: 110vw
+            height: 92vw
+    &-meteor
+      display: none
+    &-image
+      img
+        width: inherit
+        bottom: auto
+        top: em(-39, 16)
+    &-wrapper
+      &_name
+        font: font(32, 36, 600, 'Roboto Flex')
+      &_description
+        font: font(16, 24, 400, 'Roboto Flex')
+        color: $grey
+  @media only screen and (max-width: 480px)
+    &-block
+      &.first,
+      &.second
+        .quote
+          &-image
+            height: 90vw
+  @media only screen and (max-width: 480px)
+    &-block
+      &.first,
+      &.second
+        .quote
+          &-image
+            height: 88vw
+  @media only screen and (max-width: 480px)
+    &-block
+      &.first,
+      &.second
+        .quote
+          &-image
+            height: 85vw
 </style>
