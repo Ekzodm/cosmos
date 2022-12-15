@@ -22,6 +22,7 @@ section.articles
 
 import { ref } from 'vue'
 
+const emit = defineEmits(['progress'])
 const props = defineProps({
   tab: { type: Array, default: [] },
   percent: { type: String, default: '0%' },
@@ -29,7 +30,10 @@ const props = defineProps({
   active: { type: Number, default: 0 }
 })
 const index = ref(0)
-const tab_value = data => index.value = data
+const tab_value = data => {
+  index.value = data
+  emit('progress', data)
+}
 
 </script>
 

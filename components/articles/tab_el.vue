@@ -15,7 +15,6 @@ const props = defineProps({
 const active = ref(0)
 const change_button = idx => {
   active.value = idx
-  console.log(active.value)
   emit('change', idx)
 }
 watch(() => props.activeIndex, () => change_button(props.activeIndex), { deep: true, immediate: true })

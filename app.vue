@@ -93,33 +93,33 @@ const payload_2 = ref({
   tab: tab_2,
   background: background_2_1,
   article: article_2,
-  media: [media_2_1, media_2_2],
+  media: [{ item: media_2_1, type: 'image' },{ item: media_2_2, type: 'image' }],
   promt: promt
 })
 const payload_3 = ref({
   tab: tab_3,
   article: article_3,
-  media: [media_3_1, media_3_2],
+  media: [{ item: media_3_1, type: 'image' },{ item: media_3_2, type: 'image' }],
   promt: promt
 })
 const payload_4 = ref({
   tab: tab_4,
   background: background_4_1,
   article: article_4,
-  media: [media_4_1, media_4_2],
+  media: [{ item: media_4_1, type: 'animation' },{ item: media_4_2, type: 'image' }],
   promt: promt
 })
 const payload_5 = ref({
   tab: tab_5,
   article: article_5,
-  media: [media_5_1, media_5_2],
+  media: [{ item: media_5_1, type: 'image' },{ item: media_5_2, type: 'image' }],
   promt: promt
 })
 const payload_6 = ref({
   tab: tab_6,
   background: background_6_1,
   article: article_6,
-  media: [media_6_1, media_6_2],
+  media: [{ item: media_6_1, type: 'image' },{ item: media_6_2, type: 'image' }],
   promt: promt
 })
 </script>

@@ -1,5 +1,5 @@
 <template lang="pug">
-.articles-progress(:style='{ width: percent }')
+.articles-progress(:style='{ width: percent, left: !!progressItem ? "50%" : "0" }')
 .articles-text(@scroll='progress')
   .articles-text_item(v-html='data' ref='content' )
 ArticlesPromtEl(:payload='promt_search' :params='params')
@@ -7,12 +7,14 @@ ArticlesPromtEl(:payload='promt_search' :params='params')
 
 <script setup>
 
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 const props = defineProps({
   data: { type: String, default: '' },
-  promt: { type: Object, default: {} }
+  promt: { type: Object, default: {} },
+  progressItem: { type: Number, default: 0 }
 })
 const emit = defineEmits(['change'])
+const transform = ref('translateX(0)')
 const content = ref(null)
 const percent = ref('0%')
 const promt_search = ref({})
@@ -49,6 +51,7 @@ onMounted(() => prompt_select())
     height: 2px
     background: $orange
     max-width: 50%
+    position: relative
   &-text
     max-width: 50%
     width: 100%
