@@ -60,6 +60,8 @@ onMounted(() => prompt_select())
       color: $grey
       & + p
         margin-top: em(40, 22)
+      & + .author
+        margin-top: em(48, 16)
       span
         display: block
         & + span
@@ -78,4 +80,17 @@ onMounted(() => prompt_select())
       font: font(24, 32, 400, 'PT Mono')
       color: $white
       border-radius: em(20, 24)
+    :deep(.author)
+      display: flex
+      align-items: center
+      gap: em(14, 16)
+      margin-bottom: em(24, 16)
+      img
+        width: em(48, 16)
+        height: em(48, 16)
+      span
+        font: font(18, 24, 400, 'PT Mono')
+        color: $white
+        display: block
+        max-width: em(275, 18)
 </style>

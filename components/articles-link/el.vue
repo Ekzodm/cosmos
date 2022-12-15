@@ -45,6 +45,7 @@ const tab_value = data => index.value = data
     &_media
       position: absolute
       right: 0
+      top: em(50, 16)
       display: flex
       justify-content: center
       width: 50%

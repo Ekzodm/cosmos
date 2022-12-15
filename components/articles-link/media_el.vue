@@ -1,13 +1,15 @@
 <template lang="pug">
 .articles-media(:class='className')
-  img(:src='image' ali='image')
+  img(v-if='type === "image"' :src='media' ali='image')
+  video(v-else mute :src="media")
 </template>
 
 <script setup>
 
 const props = defineProps({
-  image: { type: String, default: '' },
-  className: { type: String, default: '' }
+  media: { type: String, default: '' },
+  className: { type: String, default: '' },
+  type: { type: String, default: 'image' }
 })
 
 </script>

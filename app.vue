@@ -7,13 +7,13 @@ main.main
     template(v-slot:content_1)
       ArticlesTextEl(:data='article_1?.content_1' :promt='promt')
     template(v-slot:media_1)
-      ArticlesMediaEl(:image='media_1_1' className='animate1')
+      ArticlesMediaEl(:media='media_1_1' className='animate1')
   QuoteEl(:payload='{ name: "Александр Угрюмов", description: "руководитель блока по разработке трудноизвлекаемых запасов «Газпромнефть-Технологических партнерств». С отличием окончил геологический факультет РГУ нефти и газа имени И. М. Губкина. Имеет две магистерские степени по разработке месторождений Университета Хериота-Уатта (Эдинбург, Шотландия). Работал в ведущих российских и международных нефтегазовых компаниях.", background: quote_background_2, image: quote_media_2, class: "second", meteor: quote_meteor_2 }')
   ArticlesLinkEl(:tab='tab_1' :background_2='background_1_2' v-if='article_1' :active='1' id='bosom')
     template(v-slot:content_1)
       ArticlesTextEl(:data='article_1?.content_2' :promt='promt')
     template(v-slot:media_1)
-      ArticlesMediaEl(:image='media_1_2')
+      ArticlesMediaEl(:media='media_1_2' type='animation')
   DelimiterEl(title='Цели')
     .delimiter-background
       img(src='@/assets/images/delimiter1.png')
@@ -21,11 +21,11 @@ main.main
     template(v-slot:content_1)
       ArticlesTextEl(:data='article_2["content_1"]' :promt='promt')
     template(v-slot:media_1)
-      ArticlesMediaEl(:image='media_2_1')
+      ArticlesMediaEl(:media='media_2_1')
     template(v-slot:content_2)
       ArticlesTextEl(:data='article_2["content_2"]' :promt='promt')  
     template(v-slot:media_2)
-      ArticlesMediaEl(:image='media_2_2')
+      ArticlesMediaEl(:media='media_2_2')
   DelimiterEl(title='Управление')
     .delimiter-background
       img(src='@/assets/images/delimiter2.png')
@@ -33,11 +33,11 @@ main.main
     template(v-slot:content_1)
       ArticlesTextEl(:data='article_3["content_1"]' :promt='promt')
     template(v-slot:media_1)
-      ArticlesMediaEl(:image='media_3_1')
+      ArticlesMediaEl(:media='media_3_1')
     template(v-slot:content_2)
       ArticlesTextEl(:data='article_3["content_2"]' :promt='promt')
     template(v-slot:media_2)
-      ArticlesMediaEl(:image='media_3_2')
+      ArticlesMediaEl(:media='media_3_2')
   DelimiterEl(title='Подготовка')
     .delimiter-background
       img(src='@/assets/images/delimiter3.png')
@@ -45,11 +45,11 @@ main.main
     template(v-slot:content_1)
       ArticlesTextEl(:data='article_4["content_1"]' :promt='promt')
     template(v-slot:media_1)
-      ArticlesMediaEl(:image='media_4_1')
+      ArticlesMediaEl(:media='media_4_1' type='animation')
     template(v-slot:content_2)
       ArticlesTextEl(:data='article_4["content_2"]' :promt='promt')
     template(v-slot:media_2)
-      ArticlesMediaEl(:image='media_4_2')
+      ArticlesMediaEl(:media='media_4_2')
   DelimiterEl(title='Полёты: вверх и вниз')
     .delimiter-background
       img(src='@/assets/images/delimiter4.png')
@@ -57,11 +57,11 @@ main.main
     template(v-slot:content_1)
       ArticlesTextEl(:data='article_5["content_1"]' :promt='promt')
     template(v-slot:media_1)
-      ArticlesMediaEl(:image='media_5_1')
+      ArticlesMediaEl(:media='media_5_1')
     template(v-slot:content_2)
       ArticlesTextEl(:data='article_5["content_2"]' :promt='promt')
     template(v-slot:media_2)
-      ArticlesMediaEl(:image='media_5_2')
+      ArticlesMediaEl(:media='media_5_2')
   DelimiterEl(title='Ключи')
     .delimiter-background
       img(src='@/assets/images/delimiter5.png')
@@ -69,11 +69,11 @@ main.main
     template(v-slot:content_1)
       ArticlesTextEl(:data='article_6["content_1"]' :promt='promt')
     template(v-slot:media_1)
-      ArticlesMediaEl(:image='media_6_1')
+      ArticlesMediaEl(:media='media_6_1')
     template(v-slot:content_2)
       ArticlesTextEl(:data='article_6["content_2"]' :promt='promt')
     template(v-slot:media_2)
-      ArticlesMediaEl(:image='media_6_2')
+      ArticlesMediaEl(:media='media_6_2')
 </template>
 
 <script setup>
@@ -110,12 +110,12 @@ import article_6 from '@/assets/json/article_6.json'
 
 // Media Image Articles
 import media_1_1 from '@/assets/images/media_1_1.png'
-import media_1_2 from '@/assets/images/media_1_2.png'
+import media_1_2 from '@/assets/animation/media_1_2.json'
 import media_2_1 from '@/assets/images/fly.png'
 import media_2_2 from '@/assets/images/drilling.png'
 import media_3_1 from '@/assets/images/media_3_1.png'
 import media_3_2 from '@/assets/images/media_3_2.png'
-import media_4_1 from '@/assets/images/media_4_1.png'
+import media_4_1 from '@/assets/animation/media_4_1.json'
 import media_4_2 from '@/assets/images/media_4_2.png'
 import media_5_1 from '@/assets/images/media_5_1.png'
 import media_5_2 from '@/assets/images/media_5_2.png'

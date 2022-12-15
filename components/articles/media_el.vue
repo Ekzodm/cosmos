@@ -1,13 +1,39 @@
 <template lang="pug">
-.articles-media(:class='className')
-  img(:src='image' ali='image')
+.articles-media(:class='className' ref='observe')
+  img(v-if='type === "image"' :src='media' ali='image')
+  LottieAnimation(v-else ref='anim' :animationData='media' :autoplay='false')
 </template>
 
 <script setup>
 
+import { ref, onMounted } from 'vue'
+
 const props = defineProps({
-  image: { type: String, default: '' },
-  className: { type: String, default: '' }
+  media: { type: [Object, String], required: true },
+  className: { type: String, default: '' },
+  type: { type: String, default: 'image' }
+})
+
+const anim = ref(null)
+const observe = ref(null)
+
+const options = {
+    root: null,
+    rootMargin: '5px',
+    threshold: 0.5
+}
+
+onMounted(() => {
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        anim.value.play()
+      } else {
+        anim.value.stop()
+      }
+    })
+  }, options)
+  !!observe.value && observer.observe(observe.value)
 })
 
 </script>
