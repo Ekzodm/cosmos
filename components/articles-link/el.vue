@@ -57,4 +57,16 @@ const tab_value = data => index.value = data
     left: 0
     img
       width: 100%
+  @media only screen and (max-width: 576px)
+    overflow: hidden
+    height: auto
+    .container
+      flex-direction: column
+      order: 3
+    &-wrapper
+      flex-direction: column
+      &_media
+        position: relative
+        width: 100%
+        top: em(10, 16)
 </style>

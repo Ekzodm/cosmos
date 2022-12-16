@@ -1,7 +1,7 @@
 <template lang="pug">
 section.banner(ref='observe')
   .banner-background
-    img(src='@/assets/images/banner.png' alt='background')
+    img(:src='toggle_image' alt='background')
   .banner-satellite(:style='{transform: `translateX(${satellite}px)`}')
     img(src='@/assets/images/satellite.png' alt='satellite')
   .container-column
@@ -11,13 +11,17 @@ section.banner(ref='observe')
 
 <script setup>
 
-import { ref } from 'vue'
+import { ref, inject, onMounted } from 'vue'
+
+import banner from '@/assets/images/banner.png'
+import banner_m from '@/assets/images/banner_m.png'
 
 const observe = ref(null)
 const transform = ref(1)
 const filter = ref(0)
 const satellite = ref(0)
-
+const screen_width = inject('screen_width')
+const toggle_image = ref('')
 const threshold_list = () => {
   let thresholds = []
   let numSteps = 100
@@ -43,6 +47,7 @@ onMounted(() => {
     })
   }, options)
   !!observe.value && observer.observe(observe.value)
+  toggle_image.value = screen_width.value > 576 ? banner : banner_m
 })
 
 </script>
@@ -82,4 +87,6 @@ onMounted(() => {
     z-index: 7
     img
       width: 100%
+  @media only screen and (max-width: 576px)
+    overflow: hidden
 </style>

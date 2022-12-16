@@ -3,7 +3,7 @@ section.quote
   .container
     .quote-block(:class='payload?.class')
       .quote-background
-        img(:src='payload?.background')
+        img(:src='toggle_image')
       .quote-meteor
         img(:src='payload?.meteor')
       .quote-image
@@ -15,8 +15,16 @@ section.quote
 
 <script setup>
 
+import { ref, inject } from 'vue'
+
 const props = defineProps({
   payload: { type: Object, default: {} }
+})
+
+const screen_width = inject('screen_width')
+const toggle_image = ref('')
+onMounted(() => {
+  toggle_image.value = screen_width.value > 576 ? props.payload?.background[0] : props.payload?.background[1]
 })
 
 </script>
@@ -100,6 +108,7 @@ const props = defineProps({
   @media only screen and (max-width: 768px)
     font-size: em(14, 16)
   @media only screen and (max-width: 576px)
+    margin-top: em(50, 16)
     .container
       padding: 0
       height: auto
@@ -118,39 +127,35 @@ const props = defineProps({
             padding: em(20, 16)
           &-image
             width: 110vw
-            height: 92vw
+            img
+              position: relative
+      &.first
+        .quote
+          &-background
+            img
+              top: -110%
+      &.second
+        .quote
+          &-background
+            img
+              top: -85%
+          &-wrapper
+            order: 2
     &-meteor
       display: none
     &-image
       img
         width: inherit
         bottom: auto
-        top: em(-39, 16)
+        margin-top: em(-39, 16)
     &-wrapper
       &_name
         font: font(32, 36, 600, 'Roboto Flex')
       &_description
         font: font(16, 24, 400, 'Roboto Flex')
         color: $grey
-  @media only screen and (max-width: 480px)
-    &-block
-      &.first,
-      &.second
-        .quote
-          &-image
-            height: 90vw
-  @media only screen and (max-width: 480px)
-    &-block
-      &.first,
-      &.second
-        .quote
-          &-image
-            height: 88vw
-  @media only screen and (max-width: 480px)
-    &-block
-      &.first,
-      &.second
-        .quote
-          &-image
-            height: 85vw
+    &-background
+      img
+        position: relative
+
 </style>

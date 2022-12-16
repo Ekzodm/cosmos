@@ -3,11 +3,25 @@ section.description
   .description-star
     CommonSvgEl(title='star1')
   .description-background
-    img(src='@/assets/images/description.png' alt='cosmos')
+    img(:src='toggle_image' alt='cosmos')
   .container
     article.description-content
       p Звездное небо над головой и подземные глубины под нами всегда притягивали человека. Космические тела и геологические пласты хранят не только ответы на вечные вопросы о происхождении планеты, но и огромные запасы энергии. Мы живем в эпоху, когда обычная нефть заканчивается. Человечеству предстоит научиться добывать трудноизвлекаемые углеводороды, и для этого нужны технологии по-настоящему космического уровня. Космонавт Андрей Борисенко и нефтяник Александр Угрюмов помогли нам разобраться, что общего между полетом космического корабля и бурением скважины и почему современную нефтедобывающую отрасль все чаще сравнивают с космической.
 </template>
+
+<script setup>
+
+import { ref, inject } from 'vue'
+
+import description from '@/assets/images/description.png'
+import description_m from '@/assets/images/description_m.png'
+
+const screen_width = inject('screen_width')
+const toggle_image = ref('')
+onMounted(() => {
+  toggle_image.value = screen_width.value > 576 ? description : description_m
+})
+</script>
 
 <style lang="sass" scoped>
 .description
@@ -45,6 +59,9 @@ section.description
       height: auto
   @media only screen and (max-width: 576px)
     font-size: 1em
+    overflow: hidden
+    &-background
+      top: 0
     &-content
       p
         font: font(18, 26, 400, 'PT Mono')

@@ -47,9 +47,19 @@ onMounted(() => {
     width: inherit
     height: 100%
     object-fit: contain
+  :deep(svg)
+    position: relative
+    top: em(30 ,16)
+  @media only screen and (max-width: 576px)
+    margin-left: 0
+    :deep(svg)
+      top: 0
 .animate1
   animation: media1 20s linear infinite
   position: relative
+  @media only screen and (max-width: 576px)
+    img
+      height: 75vw
 
 @keyframes media1
   0%

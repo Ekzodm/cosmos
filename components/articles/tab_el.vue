@@ -39,7 +39,25 @@ watch(() => props.activeIndex, () => change_button(props.activeIndex), { deep: t
         color: $white
   @media only screen and (max-width: 576px)
     &_list
+      padding: 0
       &-item
         font: font(14, 24, 400, 'Roboto Flex')
+        &:first-child
+          padding-left: 20px
+        &:last-child
+          padding-right: 20px
+        &::before
+          content: ''
+          position: absolute
+          left: 0
+          bottom: 0
+          width: 100%
+          height: 2px
+          background: $orange
+          opacity: 0
+        &.active
+          &::before
+            opacity: 1
+
 
 </style>

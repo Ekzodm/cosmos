@@ -2,17 +2,18 @@
 .articles-progress(:style='{ width: percent, left: !!progressItem ? "50%" : "0" }')
 .articles-text(@scroll='progress')
   .articles-text_item(v-html='data' ref='content' )
-ArticlesPromtEl(:payload='promt_search' :params='params')
+ArticlesPromtEl(:payload='promt_search' :params='params' @close='close_promt')
 </template>
 
 <script setup>
 
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, inject } from 'vue'
 const props = defineProps({
   data: { type: String, default: '' },
   promt: { type: Object, default: {} },
   progressItem: { type: Number, default: 0 }
 })
+const screen_width = inject('screen_width')
 const emit = defineEmits(['change'])
 const transform = ref('translateX(0)')
 const content = ref(null)
@@ -28,18 +29,23 @@ const progress = (e) => {
 const prompt_select = () => {
   const prompt_array = content.value.querySelectorAll('.promt')
   for(const i of prompt_array) {
-    i.addEventListener('mouseover', e => {
-      console.log(e)
-      params.value = { x: e.layerX, y: e.layerY, visible: true}
-      promt_search.value = props.promt.promt.filter(x => x.search.indexOf(e.target.textContent.toLowerCase()) > -1)[0]
-    })
-  }
-  for(const i of prompt_array) {
-    i.addEventListener('mouseout', e => {
-      params.value.visible = false
-    })
+    if ( screen_width > 576) {
+      i.addEventListener('mouseover', e => {
+        params.value = { x: +e.layerX + 15, y: +e.layerY + 15, visible: true}
+        promt_search.value = props.promt.promt.filter(x => x.search.indexOf(e.target.textContent.toLowerCase()) > -1)[0]
+      })
+      i.addEventListener('mouseout', e => {
+        params.value.visible = false
+      })
+    } else {
+      i.addEventListener('click', e => {
+        params.value = { x: 0, y: 0, visible: true}
+        promt_search.value = props.promt.promt.filter(x => x.search.indexOf(e.target.textContent.toLowerCase()) > -1)[0]
+      })
+    }
   }
 }
+const close_promt = data => params.value.visible = data
 onMounted(() => prompt_select())
 
 
@@ -99,10 +105,24 @@ onMounted(() => prompt_select())
         display: block
         max-width: em(275, 18)
   @media only screen and (max-width: 576px)
+    &-progress
+      display: none
     &-text
       max-width: 100%
       max-height: none
+      padding-top: 0
+      :deep(p)
+        font: font(16, 24, 400, 'Roboto Flex')
+        & + p
+          margin-top: em(20, 16)
       :deep(.active)
         padding: em(20, 16)
         font: font(18, 24, 400, 'PT Mono')
+      :deep(.author)
+        margin-bottom: 1em
+        img
+          width: em(40, 16)
+          height: em(40, 16)
+        span
+          font: font(14, 18, 400, 'PT Mono')
 </style>

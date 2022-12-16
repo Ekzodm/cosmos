@@ -70,5 +70,6 @@ const tab_value = data => {
       flex-direction: column
       &_media
         position: relative
+        width: 100%
 
 </style>
