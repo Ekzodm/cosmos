@@ -41,6 +41,7 @@ const tab_value = data => {
 .articles
   height: 100vh
   position: relative
+  z-index: 10
   &-wrapper
     display: flex
     align-items: center
@@ -61,7 +62,6 @@ const tab_value = data => {
     img
       width: 100%
   @media only screen and (max-width: 576px)
-    overflow: hidden
     height: auto
     .container
       flex-direction: column

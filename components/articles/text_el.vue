@@ -27,9 +27,10 @@ const progress = (e) => {
 }
 
 const prompt_select = () => {
+  console.log(screen_width)
   const prompt_array = content.value.querySelectorAll('.promt')
   for(const i of prompt_array) {
-    if ( screen_width > 576) {
+    if ( screen_width.value > 576) {
       i.addEventListener('mouseover', e => {
         params.value = { x: +e.layerX + 15, y: +e.layerY + 15, visible: true}
         promt_search.value = props.promt.promt.filter(x => x.search.indexOf(e.target.textContent.toLowerCase()) > -1)[0]
@@ -41,6 +42,7 @@ const prompt_select = () => {
       i.addEventListener('click', e => {
         params.value = { x: 0, y: 0, visible: true}
         promt_search.value = props.promt.promt.filter(x => x.search.indexOf(e.target.textContent.toLowerCase()) > -1)[0]
+        document.querySelector('html').style.overflow = 'hidden'
       })
     }
   }

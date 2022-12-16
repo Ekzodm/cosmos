@@ -6,7 +6,7 @@ section.banner(ref='observe')
     img(src='@/assets/images/satellite.png' alt='satellite')
   .container-column
     .banner-title(:style='{ transform: `scale(${transform})`, filter: `blur(${filter}px)` }')
-      CommonTitleEl(:banner='true' title='Через недра в космос') 
+      CommonTitleEl(:banner='true' title='Космос под ногами') 
 </template>
 
 <script setup>

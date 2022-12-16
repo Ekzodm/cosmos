@@ -19,6 +19,7 @@ const props = defineProps({
 const emit = defineEmits('close')
 const close = () => {
   emit('close', false)
+  document.querySelector('html').style.overflow = 'visible'
 }
 
 </script>

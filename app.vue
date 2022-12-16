@@ -14,9 +14,9 @@ main.main
       ArticlesTextEl(:data='article_1?.content_2' :promt='promt')
     template(v-slot:media_1)
       ArticlesMediaEl(:media='media_1_2' type='animation')
-  DelimiterEl(title='Цели' :image='[delimiter1, delimiter1_m]')
+  DelimiterEl(title='Выбор курса' :image='[delimiter1, delimiter1_m]')
   CommonEl(:payload='payload_2' v-if='article_2')
-  DelimiterEl(title='Управление' :image='[delimiter2, delimiter2_m]')
+  DelimiterEl(title='Навигация' :image='[delimiter2, delimiter2_m]')
   CommonEl(:payload='payload_3' v-if='article_3')
   DelimiterEl(title='Подготовка' :image='[delimiter3, delimiter3_m]')
   CommonEl(:payload='payload_4' v-if='article_4')
@@ -31,7 +31,7 @@ main.main
 import { ref, computed, provide } from 'vue'
 
 const tab_1 = [{ to: 'star', title: 'На пути к звёздам' }, { to: 'bosom', title: 'На пути к недрам' }]
-const tab_2 = [{ title: 'Цели для полёта' }, { title: 'Цели для бурения' }]
+const tab_2 = [{ title: 'Цели полёта' }, { title: 'Цели бурения' }]
 const tab_3 = [{ title: 'Управление полётом' }, { title: 'Управление бурением' }]
 const tab_4 = [{ title: 'Подготовка к взлёту' }, { title: 'Подготовка к бурению' }]
 const tab_5 = [{ title: 'На орбите' }, { title: 'В недрах' }]
