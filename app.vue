@@ -18,11 +18,11 @@ main.main
   CommonEl(:payload='payload_2' v-if='article_2')
   DelimiterEl(title='Навигация' :image='[delimiter2, delimiter2_m]')
   CommonEl(:payload='payload_3' v-if='article_3')
-  DelimiterEl(title='Подготовка' :image='[delimiter3, delimiter3_m]')
+  DelimiterEl(title='Обратный отсчет' :image='[delimiter3, delimiter3_m]')
   CommonEl(:payload='payload_4' v-if='article_4')
-  DelimiterEl(title='Полёты: вверх и вниз' :image='[delimiter4, delimiter4_m]')
+  DelimiterEl(title='В космосе и недрах' :image='[delimiter4, delimiter4_m]')
   CommonEl(:payload='payload_5' v-if='article_5')
-  DelimiterEl(title='Ключи' :image='[delimiter5, delimiter5_m]')
+  DelimiterEl(title='Ключи от будущего' :image='[delimiter5, delimiter5_m]')
   CommonEl(:payload='payload_6' v-if='article_6')
 </template>
 
@@ -35,7 +35,7 @@ const tab_2 = [{ title: 'Цели полёта' }, { title: 'Цели бурен
 const tab_3 = [{ title: 'Управление полётом' }, { title: 'Управление бурением' }]
 const tab_4 = [{ title: 'Подготовка к взлёту' }, { title: 'Подготовка к бурению' }]
 const tab_5 = [{ title: 'На орбите' }, { title: 'В недрах' }]
-const tab_6 = [{ title: 'Ключи к космосу' }, { title: 'Ключи к недрам' }]
+const tab_6 = [{ title: 'Перспективы космонавтики' }, { title: 'Перпективы нефтедобычи' }]
 
 // Quote Content
 import quote_background_1 from '@/assets/images/quote_background_1.png'
