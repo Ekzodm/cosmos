@@ -7,7 +7,7 @@ ArticlesEl(:tab='payload?.tab' :background='payload?.background' :active='tab' @
   template(v-slot:content_2)
     ArticlesTextEl(:data='payload?.article?.content_2' :promt='payload?.promt' :progressItem='progress_tab')  
   template(v-slot:media_2)
-    ArticlesMediaEl(:media='payload?.media[1]?.item' :type='payload?.media[1]?.type')
+    ArticlesMediaEl(:media='payload?.media[1]?.item' :type='payload?.media[1]?.type' :background='payload?.media[1]?.background' :className='payload?.media[1]?.class_name')
 </template>
 
 <script setup>

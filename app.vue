@@ -77,6 +77,11 @@ import media_6_1 from '@/assets/images/media_6_1.png'
 import media_6_2 from '@/assets/images/media_6_2.png'
 
 import media_background_2_1 from '@/assets/images/media_background_2_1.png'
+import media_background_3_1 from '@/assets/images/media_background_3_1.png'
+import media_background_3_1_m from '@/assets/images/media_background_3_1_m.png'
+import media_background_4_2 from '@/assets/images/media_background_4_2.png'
+import media_background_4_2_m from '@/assets/images/media_background_4_2_m.png'
+import media_background_5_1 from '@/assets/images/media_background_5_1.png'
 
 // Promt
 import promt from '@/assets/json/promt.json'
@@ -109,33 +114,33 @@ const payload_2 = ref({
   tab: tab_2,
   background: background_2_1,
   article: article_2,
-  media: [{ item: media_2_1, type: 'image', background: media_background_2_1, class_name: 'animate1' },{ item: media_2_2, type: 'image' }],
+  media: [{ item: media_2_1, type: 'image', background: media_background_2_1, class_name: 'media21' },{ item: media_2_2, type: 'image' }],
   promt: promt
 })
 const payload_3 = ref({
   tab: tab_3,
   article: article_3,
-  media: [{ item: media_3_1, type: 'image' },{ item: media_3_2, type: 'image' }],
+  media: [{ item: media_3_1, type: 'image', background: [media_background_3_1, media_background_3_1_m], class_name: 'media31' },{ item: media_3_2, type: 'image', class_name: 'scale' }],
   promt: promt
 })
 const payload_4 = ref({
   tab: tab_4,
   background: background_4_1,
   article: article_4,
-  media: [{ item: media_4_1, type: 'animation' },{ item: media_4_2, type: 'image' }],
+  media: [{ item: media_4_1, type: 'animation' },{ item: media_4_2, type: 'image', background: [media_background_4_2, media_background_4_2_m], class_name: 'media42' }],
   promt: promt
 })
 const payload_5 = ref({
   tab: tab_5,
   article: article_5,
-  media: [{ item: media_5_1, type: 'image' },{ item: media_5_2, type: 'image' }],
+  media: [{ item: media_5_1, type: 'image', background: media_background_5_1, class_name: 'media51' },{ item: media_5_2, type: 'image' }],
   promt: promt
 })
 const payload_6 = ref({
   tab: tab_6,
   background: screen_width > 576 ? background_6_1 : null,
   article: article_6,
-  media: [{ item: media_6_1, type: 'image' },{ item: media_6_2, type: 'image' }],
+  media: [{ item: media_6_1, type: 'image' },{ item: media_6_2, type: 'image', class_name: 'media62' }],
   promt: promt
 })
 
