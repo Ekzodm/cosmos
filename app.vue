@@ -31,11 +31,11 @@ main.main
 import { ref, computed, provide } from 'vue'
 
 const tab_1 = [{ to: 'star', title: 'На пути к звёздам' }, { to: 'bosom', title: 'На пути к недрам' }]
-const tab_2 = [{ title: 'Цели полёта' }, { title: 'Цели бурения' }]
-const tab_3 = [{ title: 'Управление полётом' }, { title: 'Управление бурением' }]
-const tab_4 = [{ title: 'Подготовка к взлёту' }, { title: 'Подготовка к бурению' }]
-const tab_5 = [{ title: 'На орбите' }, { title: 'В недрах' }]
-const tab_6 = [{ title: 'Будущее космонавтики' }, { title: 'Будущее нефтедобычи' }]
+const tab_2 = [{ title: 'Цели полёта', id: 10 }, { title: 'Цели бурения', id: 11 }]
+const tab_3 = [{ title: 'Управление полётом', id: 12 }, { title: 'Управление бурением', id: 13 }]
+const tab_4 = [{ title: 'Подготовка к взлёту', id: 14 }, { title: 'Подготовка к бурению', id: 15 }]
+const tab_5 = [{ title: 'На орбите', id: 16 }, { title: 'В недрах', id: 17 }]
+const tab_6 = [{ title: 'Будущее космонавтики', id: 18 }, { title: 'Будущее нефтедобычи', id: 19 }]
 
 // Quote Content
 import quote_background_1 from '@/assets/images/quote/quote_background_1.png'

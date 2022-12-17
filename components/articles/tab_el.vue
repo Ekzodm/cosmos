@@ -1,7 +1,7 @@
 <template lang="pug">
 nav.articles-nav
   ul.articles-nav_list.container
-    li.articles-nav_list-item(v-for='item, idx in tab' :key='idx' @click='change_button(idx)' :class='[+active === +idx && "active"]') {{item.title}}
+    li.articles-nav_list-item(v-for='item, idx in tab' :key='idx' @click='change_button(idx)' :id='item.id' :class='[+active === +idx && "active"]') {{item.title}}
 </template>
 
 <script setup>

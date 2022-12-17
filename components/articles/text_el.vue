@@ -1,22 +1,25 @@
 <template lang="pug">
 .articles-progress(:style='{ width: percent, left: !!progressItem ? "50%" : "0" }')
 .articles-text(@scroll='progress')
-  .articles-text_item(v-html='data' ref='content' )
+  .articles-text_item(v-html='data' ref='content')
+  .articles-observer(ref='toggle_content')
 ArticlesPromtEl(:payload='promt_search' :params='params' @close='close_promt')
 </template>
 
 <script setup>
 
-import { ref, onMounted, inject } from 'vue'
+import { ref, onMounted, inject} from 'vue'
 const props = defineProps({
   data: { type: String, default: '' },
   promt: { type: Object, default: {} },
-  progressItem: { type: Number, default: 0 }
+  progressItem: { type: Number, default: 0 },
+  id: { type: Number, default: 0 }
 })
 const screen_width = inject('screen_width')
 const emit = defineEmits(['change'])
 const transform = ref('translateX(0)')
 const content = ref(null)
+const toggle_content = ref(null)
 const percent = ref('0%')
 const promt_search = ref({})
 const params = ref({})
@@ -24,6 +27,11 @@ const progress = (e) => {
   const { offsetHeight, scrollHeight, scrollTop } = e.target
   percent.value = `${Math.ceil(scrollTop * 100 / ((scrollHeight - offsetHeight) * 2))}%`
   percent.value === '50%' && emit('change', 1)
+}
+const options = {
+    root: null,
+    rootMargin: '20% 0% 20% 0%',
+    threshold: 1
 }
 
 const prompt_select = () => {
@@ -47,7 +55,25 @@ const prompt_select = () => {
   }
 }
 const close_promt = data => params.value.visible = data
-onMounted(() => prompt_select())
+const mobile_tab = () => {
+  if(screen_width.value <= 576 && props.progressItem === 0 && props.id !== 0) {
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          const el = document.getElementById(props.id)
+          emit('change', 1)
+          window.scrollBy(0, el.getBoundingClientRect().top)
+          observer.unobserve(entry.target)
+        }
+      })
+    }, options)
+    !!toggle_content.value && observer.observe(toggle_content.value)
+  }
+}
+onMounted(() => { 
+  prompt_select()
+  mobile_tab()
+ })
 
 
 </script>
