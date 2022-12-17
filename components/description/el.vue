@@ -13,8 +13,8 @@ section.description
 
 import { ref, inject } from 'vue'
 
-import description from '@/assets/images/description.png'
-import description_m from '@/assets/images/description_m.png'
+import description from '@/assets/images/description/description.png'
+import description_m from '@/assets/images/description/description_m.png'
 
 const screen_width = inject('screen_width')
 const toggle_image = ref('')

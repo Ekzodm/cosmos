@@ -35,17 +35,17 @@ const tab_2 = [{ title: 'Цели полёта' }, { title: 'Цели бурен
 const tab_3 = [{ title: 'Управление полётом' }, { title: 'Управление бурением' }]
 const tab_4 = [{ title: 'Подготовка к взлёту' }, { title: 'Подготовка к бурению' }]
 const tab_5 = [{ title: 'На орбите' }, { title: 'В недрах' }]
-const tab_6 = [{ title: 'Перспективы космонавтики' }, { title: 'Перпективы нефтедобычи' }]
+const tab_6 = [{ title: 'Будущее космонавтики' }, { title: 'Будущее нефтедобычи' }]
 
 // Quote Content
-import quote_background_1 from '@/assets/images/quote_background_1.png'
-import quote_background_2 from '@/assets/images/quote_background_2.png'
-import quote_background_1_m from '@/assets/images/quote_background_1_m.png'
-import quote_background_2_m from '@/assets/images/quote_background_2_m.png'
-import quote_media_1 from '@/assets/images/quote_media_1.png'
-import quote_media_2 from '@/assets/images/quote_media_2.png'
-import quote_meteor_1 from '@/assets/images/quote_meteor_1.png'
-import quote_meteor_2 from '@/assets/images/quote_meteor_2.png'
+import quote_background_1 from '@/assets/images/quote/quote_background_1.png'
+import quote_background_2 from '@/assets/images/quote/quote_background_2.png'
+import quote_background_1_m from '@/assets/images/quote/quote_background_1_m.png'
+import quote_background_2_m from '@/assets/images/quote/quote_background_2_m.png'
+import quote_media_1 from '@/assets/images/quote/quote_media_1.png'
+import quote_media_2 from '@/assets/images/quote/quote_media_2.png'
+import quote_meteor_1 from '@/assets/images/quote/quote_meteor_1.png'
+import quote_meteor_2 from '@/assets/images/quote/quote_meteor_2.png'
 
 // Background Articles
 import background_1_1 from '@/assets/images/background_1_1.png'
@@ -65,7 +65,7 @@ import article_6 from '@/assets/json/article_6.json'
 // Media Image Articles
 import media_1_1 from '@/assets/images/media_1_1.png'
 import media_1_2 from '@/assets/animation/media_1_2.json'
-import media_2_1 from '@/assets/images/fly.png'
+import media_2_1 from '@/assets/images/media_2_1.png'
 import media_2_2 from '@/assets/images/drilling.png'
 import media_3_1 from '@/assets/images/media_3_1.png'
 import media_3_2 from '@/assets/images/media_3_2.png'
@@ -76,20 +76,22 @@ import media_5_2 from '@/assets/images/media_5_2.png'
 import media_6_1 from '@/assets/images/media_6_1.png'
 import media_6_2 from '@/assets/images/media_6_2.png'
 
+import media_background_2_1 from '@/assets/images/media_background_2_1.png'
+
 // Promt
 import promt from '@/assets/json/promt.json'
 
 // Delimiter
-import delimiter1 from '@/assets/images/delimiter1.png'
-import delimiter1_m from '@/assets/images/delimiter1_m.png'
-import delimiter2 from '@/assets/images/delimiter2.png'
-import delimiter2_m from '@/assets/images/delimiter2_m.png'
-import delimiter3 from '@/assets/images/delimiter3.png'
-import delimiter3_m from '@/assets/images/delimiter3_m.png'
-import delimiter4 from '@/assets/images/delimiter4.png'
-import delimiter4_m from '@/assets/images/delimiter4_m.png'
-import delimiter5 from '@/assets/images/delimiter5.png'
-import delimiter5_m from '@/assets/images/delimiter5_m.png'
+import delimiter1 from '@/assets/images/delimiter/delimiter1.png'
+import delimiter1_m from '@/assets/images/delimiter/delimiter1_m.png'
+import delimiter2 from '@/assets/images/delimiter/delimiter2.png'
+import delimiter2_m from '@/assets/images/delimiter/delimiter2_m.png'
+import delimiter3 from '@/assets/images/delimiter/delimiter3.png'
+import delimiter3_m from '@/assets/images/delimiter/delimiter3_m.png'
+import delimiter4 from '@/assets/images/delimiter/delimiter4.png'
+import delimiter4_m from '@/assets/images/delimiter/delimiter4_m.png'
+import delimiter5 from '@/assets/images/delimiter/delimiter5.png'
+import delimiter5_m from '@/assets/images/delimiter/delimiter5_m.png'
 
 const screen_width = computed(() => {
   if (process.client) {
@@ -107,7 +109,7 @@ const payload_2 = ref({
   tab: tab_2,
   background: background_2_1,
   article: article_2,
-  media: [{ item: media_2_1, type: 'image' },{ item: media_2_2, type: 'image' }],
+  media: [{ item: media_2_1, type: 'image', background: media_background_2_1, class_name: 'animate1' },{ item: media_2_2, type: 'image' }],
   promt: promt
 })
 const payload_3 = ref({

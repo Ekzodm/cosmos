@@ -79,6 +79,7 @@ onMounted(() => {
     left: 0
     width: 100%
     height: 100%
+    z-index: 1
     img
       width: 100%
   &-image
@@ -92,6 +93,8 @@ onMounted(() => {
     flex-direction: column
     align-items: flex-start
     width: 100%
+    position: relative
+    z-index: 2
     &_name
       color: $white
       font: font(64, 72, 600, 'Roboto Flex')
@@ -139,12 +142,19 @@ onMounted(() => {
           &-background
             img
               top: -85%
+          &-image
+            max-height: 88vw
+            img
+              object-fit: cover
+              object-position: 0% 0%
+              left: em(20, 16)
           &-wrapper
             order: 2
     &-meteor
       display: none
     &-image
       position: relative
+      z-index: 2
       &::before
         content: ''
         position: absolute

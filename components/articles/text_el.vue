@@ -83,7 +83,7 @@ onMounted(() => prompt_select())
       background: rgba(224, 116, 56, .1)
       padding: 0 em(8, 22)
       border-radius: em(6, 22)
-      display: inline-block
+      display: inline
       cursor: pointer
       z-index: 15
     :deep(.active)

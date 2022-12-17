@@ -42,6 +42,7 @@ watch(() => props.activeIndex, () => change_button(props.activeIndex), { deep: t
       padding: 0
       &-item
         font: font(14, 24, 400, 'Roboto Flex')
+        text-align: center
         &:first-child
           padding-left: 20px
         &:last-child

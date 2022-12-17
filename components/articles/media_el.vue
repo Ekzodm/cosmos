@@ -1,6 +1,8 @@
 <template lang="pug">
-.articles-media(:class='className' ref='observe')
-  img(v-if='type === "image"' :src='media' ali='image')
+.articles-media( ref='observe')
+  .articles-media_background(v-if='!!background')
+    img(:src='background')
+  img(v-if='type === "image"' :src='media' ali='image' :class='className')
   LottieAnimation(v-else ref='anim' :animationData='media' :autoplay='false')
 </template>
 
@@ -11,7 +13,8 @@ import { ref, onMounted } from 'vue'
 const props = defineProps({
   media: { type: [Object, String], required: true },
   className: { type: String, default: '' },
-  type: { type: String, default: 'image' }
+  type: { type: String, default: 'image' },
+  background: { type: String, default: '' }
 })
 
 const anim = ref(null)
@@ -43,6 +46,13 @@ onMounted(() => {
   width: 100%
   height: 100%
   margin-left: em(20, 16)
+  &_background
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    z-index: -1
   img
     width: inherit
     height: 100%
@@ -57,6 +67,7 @@ onMounted(() => {
 .animate1
   animation: media1 20s linear infinite
   position: relative
+  top: em(20, 16)
   @media only screen and (max-width: 576px)
     img
       height: 75vw

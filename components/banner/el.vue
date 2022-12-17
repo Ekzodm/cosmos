@@ -13,10 +13,10 @@ section.banner(ref='observe')
 
 import { ref, inject, onMounted } from 'vue'
 
-import banner from '@/assets/images/banner.png'
-import banner_m from '@/assets/images/banner_m.png'
-import satellite from '@/assets/images/satellite.png'
-import satellite_m from '@/assets/images/satellite_m.png'
+import banner from '@/assets/images/banner/banner.png'
+import banner_m from '@/assets/images/banner/banner_m.png'
+import satellite from '@/assets/images/banner/satellite.png'
+import satellite_m from '@/assets/images/banner/satellite_m.png'
 
 const observe = ref(null)
 const transform = ref(1)
