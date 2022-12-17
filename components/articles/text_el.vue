@@ -27,7 +27,6 @@ const progress = (e) => {
 }
 
 const prompt_select = () => {
-  console.log(screen_width)
   const prompt_array = content.value.querySelectorAll('.promt')
   for(const i of prompt_array) {
     if ( screen_width.value > 576) {

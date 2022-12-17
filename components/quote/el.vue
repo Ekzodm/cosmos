@@ -144,6 +144,16 @@ onMounted(() => {
     &-meteor
       display: none
     &-image
+      position: relative
+      &::before
+        content: ''
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        background: linear-gradient(180deg, rgba(4, 18, 75, 0) 60.24%, #04284B 100%)
+        z-index: 10
       img
         width: inherit
         bottom: auto

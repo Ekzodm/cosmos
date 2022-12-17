@@ -3,10 +3,8 @@
   .popup-close(@click.prevent='close')
     CommonSvgEl(title='close')
   .popup-content
-    .popup-content_title
-      h4 {{payload?.title}}
-    .popup-content_description
-      p {{payload?.description}}
+    h4 {{payload?.title}}
+    p {{payload?.description}}
 </template>
 
 <script setup>
@@ -48,15 +46,14 @@ const close = () => {
       width: 2em
       height: 2em
   &-content
-    display: flex
-    flex-direction: column
-    align-items: flex-start
-    &_title
-      font: font(28, 40, 400, 'Roboto Flex')
+    h4
+      font: font(28, 36, 400, 'Roboto Flex')
       color: $orange
-    &_description
+      display: inline
+    p
       font: font(20, 28, 400, 'Roboto Flex')
       color: $white
+      display: inline
   &.active
     opacity: 1
     visibility: visible
@@ -79,8 +76,8 @@ const close = () => {
       border-radius: 1em
       margin-top: em(4, 16)
       width: 100%
-      &_title
-        font: font(20, 36, 400, 'Roboto Flex')
-      &_description
+      h4
+        font: font(20, 28, 400, 'Roboto Flex')
+      p
         font: font(16, 24, 400, 'Roboto Flex')
 </style>

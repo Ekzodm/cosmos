@@ -2,8 +2,8 @@
 section.banner(ref='observe')
   .banner-background
     img(:src='toggle_image' alt='background')
-  .banner-satellite(:style='{transform: `translateX(${satellite}px)`}')
-    img(src='@/assets/images/satellite.png' alt='satellite')
+  .banner-satellite(:style='{transform: `translateX(${satellite_transform}px)`}')
+    img(:src='toggle_satellite' alt='satellite')
   .container-column
     .banner-title(:style='{ transform: `scale(${transform})`, filter: `blur(${filter}px)` }')
       CommonTitleEl(:banner='true' title='Космос под ногами') 
@@ -15,13 +15,16 @@ import { ref, inject, onMounted } from 'vue'
 
 import banner from '@/assets/images/banner.png'
 import banner_m from '@/assets/images/banner_m.png'
+import satellite from '@/assets/images/satellite.png'
+import satellite_m from '@/assets/images/satellite_m.png'
 
 const observe = ref(null)
 const transform = ref(1)
 const filter = ref(0)
-const satellite = ref(0)
+const satellite_transform = ref(0)
 const screen_width = inject('screen_width')
 const toggle_image = ref('')
+const toggle_satellite = ref('')
 const threshold_list = () => {
   let thresholds = []
   let numSteps = 100
@@ -43,11 +46,12 @@ onMounted(() => {
       const ratio = 1 - entry.intersectionRatio
       transform.value = 1 + ratio * 2
       filter.value = 0 + ratio * 10
-      satellite.value = 0 + ratio * 500
+      satellite_transform.value = 0 + ratio * 500
     })
   }, options)
   !!observe.value && observer.observe(observe.value)
   toggle_image.value = screen_width.value > 576 ? banner : banner_m
+  toggle_satellite.value = screen_width.value > 576 ? satellite : satellite_m
 })
 
 </script>
@@ -89,4 +93,6 @@ onMounted(() => {
       width: 100%
   @media only screen and (max-width: 576px)
     overflow: hidden
+    &-satellite
+      width: 100%
 </style>

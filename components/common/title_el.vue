@@ -33,5 +33,5 @@ const props = defineProps({
       font-size: em(120, 16)
   @media only screen and (max-width: 576px)
     *
-      font: font(56, 60, 600, 'Roboto Flex')
+      font: font(50, 55, 600, 'Roboto Flex')
 </style>
