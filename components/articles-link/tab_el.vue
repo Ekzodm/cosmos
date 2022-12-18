@@ -1,7 +1,7 @@
 <template lang="pug">
 nav.articles-nav
   ul.articles-nav_list.container 
-    li.articles-nav_list-item(v-for='item, idx in tab' :key='idx' :class='[+idx === +active && "active"]')
+    li.articles-nav_list-item(v-for='item, idx in tab' :key='idx' :class='[+idx === +activeIndex && "active"]')
       a.articles-nav_list-link(:href='`#${item.to}`') {{item.title}}
 </template>
 
@@ -9,7 +9,7 @@ nav.articles-nav
 
 const props = defineProps({
   tab: { type: Array, default: [] },
-  active: { type: Number }
+  activeIndex: { type: Number }
 })
 
 </script>
@@ -39,6 +39,7 @@ const props = defineProps({
       padding: 0
       &-item
         font: font(14, 24, 400, 'Roboto Flex')
+        text-align: center
         &:first-child
           padding-left: 20px
         &:last-child

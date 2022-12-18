@@ -1,8 +1,8 @@
 <template lang="pug">
 section.articles
-  ArticlesTabEl(:tab='tab' @change='tab_value' :activeIndex='active')
-  transition(name='fade' mode='out-in')
-    .articles-wrapper(v-if='index === 0')
+  ArticlesTabEl(:tab='tab' @change='tab_value' :activeIndex='active')  
+  transition(name='fade')
+    .articles-wrapper(v-show='index === 0')
       .articles-background(v-if='!!background')
         img(:src='background' alt='background')
       .container
@@ -10,7 +10,8 @@ section.articles
           slot(name='content_1')
       .articles-wrapper_media
         slot(name='media_1')
-    .articles-wrapper(v-else)
+  transition(name='fade')
+    .articles-wrapper(v-show='index===1')
       .container
         .articles-wrapper_content
           slot(name='content_2')

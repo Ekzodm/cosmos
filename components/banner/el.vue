@@ -89,8 +89,11 @@ onMounted(() => {
     top: em(-30, 16)
     width: 55.389vw
     z-index: 7
+    will-change: transform
     img
       width: 100%
+  &-title
+    will-change: transform
   @media only screen and (max-width: 576px)
     overflow: hidden
     &-satellite

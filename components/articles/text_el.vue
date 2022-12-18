@@ -13,7 +13,8 @@ const props = defineProps({
   data: { type: String, default: '' },
   promt: { type: Object, default: {} },
   progressItem: { type: Number, default: 0 },
-  id: { type: Number, default: 0 }
+  id: { type: Number, default: 0 },
+  observeMode: { type: String, default: 'default' }
 })
 const screen_width = inject('screen_width')
 const emit = defineEmits(['change'])
@@ -28,12 +29,20 @@ const progress = (e) => {
   percent.value = `${Math.ceil(scrollTop * 100 / ((scrollHeight - offsetHeight) * 2))}%`
   percent.value === '50%' && emit('change', 1)
 }
-const options = {
+const options = ref({})
+if(props.observeMode === 'last') {
+  options.value = {
     root: null,
-    rootMargin: '20% 0% 20% 0%',
+    rootMargin: '0% 0% 0% 0%',
     threshold: 1
+  }
+} else {
+  options.value = {
+    root: null,
+    rootMargin: '-20% 0% -70% 0%',
+    threshold: 1
+  }
 }
-
 const prompt_select = () => {
   const prompt_array = content.value.querySelectorAll('.promt')
   for(const i of prompt_array) {
@@ -61,12 +70,12 @@ const mobile_tab = () => {
       entries.forEach(entry => {
         if(entry.isIntersecting) {
           const el = document.getElementById(props.id)
+          window.scrollBy(0, el.getBoundingClientRect().top - 10)
           emit('change', 1)
-          window.scrollBy(0, el.getBoundingClientRect().top)
-          observer.unobserve(entry.target)
+          observer.disconnect()
         }
       })
-    }, options)
+    }, options.value)
     !!toggle_content.value && observer.observe(toggle_content.value)
   }
 }
@@ -134,6 +143,14 @@ onMounted(() => {
   @media only screen and (max-width: 576px)
     &-progress
       display: none
+    &-observer
+      width: 100%
+      height: 50px
+      position: absolute
+      bottom: 0
+      left: 0
+      z-index: 10
+      background: transparent
     &-text
       max-width: 100%
       max-height: none

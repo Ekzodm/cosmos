@@ -1,6 +1,6 @@
 <template lang="pug">
 section.articles
-  ArticlesLinkTabEl(:tab='tab' :percent='percent' :active='active')
+  ArticlesLinkTabEl(:tab='tab' @change='tab_value' :percent='percent' :activeIndex='active')
   transition(name='fade' mode='out-in')
     .articles-wrapper(v-if='index === 0')
       .articles-background(v-if='!!background')

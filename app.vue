@@ -5,13 +5,13 @@ main.main
   QuoteEl(:payload='{ name: "Андрей Борисенко", description: "летчик-космонавт, Герой России (2012). В 1987 году окончил ленинградский «Военмех», в 2003-2021-х входил в отряд космонавтов. Дважды участвовал в полетах к Международной космической станции.", background: [quote_background_1, quote_background_1_m], image: quote_media_1, class: "first", meteor: quote_meteor_1 }')
   ArticlesLinkEl(:tab='tab_1' :background='background_1_1' v-if='article_1' :active='0' id='star')
     template(v-slot:content_1)
-      ArticlesTextEl(:data='article_1?.content_1' :promt='promt')
+      ArticlesTextEl(:data='article_1?.content_1' :promt='promt' :progressItem='0')
     template(v-slot:media_1)
       ArticlesMediaEl(:media='media_1_1' className='animate1')
   QuoteEl(:payload='{ name: "Александр Угрюмов", description: "руководитель блока по разработке трудноизвлекаемых запасов «Газпромнефть-Технологических партнерств». С отличием окончил геологический факультет РГУ нефти и газа имени И. М. Губкина. Имеет две магистерские степени по разработке месторождений Университета Хериота-Уатта (Эдинбург, Шотландия). Работал в ведущих российских и международных нефтегазовых компаниях.", background: [quote_background_2, quote_background_2_m], image: quote_media_2, class: "second", meteor: quote_meteor_2 }')
   ArticlesLinkEl(:tab='tab_1' :background_2='background_1_2' v-if='article_1' :active='1' id='bosom')
     template(v-slot:content_1)
-      ArticlesTextEl(:data='article_1?.content_2' :promt='promt')
+      ArticlesTextEl(:data='article_1?.content_2' :promt='promt' :progressItem='1')
     template(v-slot:media_1)
       ArticlesMediaEl(:media='media_1_2' type='animation')
   DelimiterEl(title='Выбор курса' :image='[delimiter1, delimiter1_m]')
@@ -114,12 +114,14 @@ const payload_2 = ref({
   tab: tab_2,
   background: background_2_1,
   article: article_2,
+  observe: 'default',
   media: [{ item: media_2_1, type: 'image', background: media_background_2_1, class_name: 'media21' },{ item: media_2_2, type: 'image' }],
   promt: promt
 })
 const payload_3 = ref({
   tab: tab_3,
   article: article_3,
+  observe: 'default',
   media: [{ item: media_3_1, type: 'image', background: [media_background_3_1, media_background_3_1_m], class_name: 'media31' },{ item: media_3_2, type: 'image', class_name: 'scale' }],
   promt: promt
 })
@@ -127,12 +129,14 @@ const payload_4 = ref({
   tab: tab_4,
   background: background_4_1,
   article: article_4,
+  observe: 'default',
   media: [{ item: media_4_1, type: 'animation' },{ item: media_4_2, type: 'image', background: [media_background_4_2, media_background_4_2_m], class_name: 'media42' }],
   promt: promt
 })
 const payload_5 = ref({
   tab: tab_5,
   article: article_5,
+  observe: 'default',
   media: [{ item: media_5_1, type: 'image', background: media_background_5_1, class_name: 'media51' },{ item: media_5_2, type: 'image' }],
   promt: promt
 })
@@ -140,6 +144,7 @@ const payload_6 = ref({
   tab: tab_6,
   background: screen_width > 576 ? background_6_1 : null,
   article: article_6,
+  observe: 'last',
   media: [{ item: media_6_1, type: 'image' },{ item: media_6_2, type: 'image', class_name: 'media62' }],
   promt: promt
 })
