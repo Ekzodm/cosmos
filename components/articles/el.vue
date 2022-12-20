@@ -1,5 +1,5 @@
 <template lang="pug">
-section.articles
+section.articles(ref='article')
   ArticlesTabEl(:tab='tab' @change='tab_value' :activeIndex='active')  
   transition(name='fade')
     .articles-wrapper(v-show='index === 0')
@@ -21,9 +21,10 @@ section.articles
 
 <script setup>
 
-import { ref } from 'vue'
+import { ref, onMounted, inject } from 'vue'
 
 const emit = defineEmits(['progress'])
+const screen_width = inject('screen_width')
 const props = defineProps({
   tab: { type: Array, default: [] },
   percent: { type: String, default: '0%' },
@@ -31,10 +32,32 @@ const props = defineProps({
   active: { type: Number, default: 0 }
 })
 const index = ref(0)
+const article = ref(null)
 const tab_value = data => {
   index.value = data
   emit('progress', data)
 }
+const article_observer = () => {
+  if(screen_width <= 576) return false
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.99
+  }
+  const html = document.querySelector('html')
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      console.log(entry.intersectionRatio)
+      if (entry.isIntersecting) {
+        html.style.overflowY = 'hidden'
+        observer.unobserve(entry.target)
+      }
+
+    })
+  }, options)
+  observer.observe(article.value)
+}
+onMounted(() => article_observer())
 
 </script>
 

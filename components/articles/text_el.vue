@@ -1,6 +1,6 @@
 <template lang="pug">
 .articles-progress(:style='{ width: percent, left: !!progressItem ? "50%" : "0" }')
-.articles-text(@scroll='progress')
+.articles-text(@scroll='progress' :class='[overflow && "overflow"]')
   .articles-text_item(v-html='data' ref='content')
   .articles-observer(ref='toggle_content')
 ArticlesPromtEl(:payload='promt_search' :params='params' :visible='promt_visible' @close='close_promt' @height='get_height')
@@ -8,7 +8,7 @@ ArticlesPromtEl(:payload='promt_search' :params='params' :visible='promt_visible
 
 <script setup>
 
-import { ref, onMounted, inject} from 'vue'
+import { ref, onMounted, inject, watch } from 'vue'
 const props = defineProps({
   data: { type: String, default: '' },
   promt: { type: Object, default: {} },
@@ -26,10 +26,12 @@ const promt_search = ref({})
 const promt = ref(0)
 const promt_visible = ref(false)
 const params = ref({})
+const overflow = ref(false)
 const progress = (e) => {
   const { offsetHeight, scrollHeight, scrollTop } = e.target
   percent.value = `${Math.ceil(scrollTop * 100 / ((scrollHeight - offsetHeight) * 2))}%`
-  percent.value === '50%' && emit('change', 1)
+  percent.value === '50%' && props.progressItem === 0 && emit('change', 1)
+  percent.value === '50%' && props.progressItem === 1 && (document.querySelector('html').style.overflowY = 'visible', overflow.value = false)
 }
 const options = {
   root: null,
@@ -43,7 +45,7 @@ const prompt_select = () => {
       i.addEventListener('mouseenter', e => {
         promt_search.value = props.promt.promt.filter(x => x.search.indexOf(e.target.textContent.toLowerCase()) > -1)[0]
           promt_visible.value = true
-          promt.value + e.target.getBoundingClientRect().top <= window.innerHeight ? params.value = { x: +e.layerX + 15, y: +e.layerY + 15 } : params.value = { x: +e.layerX + 15, y: +e.layerY + 15 - promt.value }
+          promt.value + e.target.getBoundingClientRect().top <= window.innerHeight ? params.value = { x: +e.layerX + 15, y: +e.layerY + 15 } : params.value = { x: +e.layerX + 15, y: +e.layerY - 15 - promt.value }
       })
       i.addEventListener('mouseleave', e => {
         promt_visible.value = false
@@ -76,11 +78,26 @@ const mobile_tab = () => {
     !!toggle_content.value && observer.observe(toggle_content.value)
   }
 }
+const mutation = () => {
+  const options = {
+    attributes: true, 
+    attributeFilter: ["style"]
+  }
+  const html = document.querySelector('html')
+  const observer = new MutationObserver((entriesList, observer) => {
+    console.log(entriesList)
+    for(let entries of entriesList) {
+      console.log(entries.target.style.overflowY === 'hidden')
+      entries.target.style.overflowY === 'hidden' ? (overflow.value = true) : overflow.value = false
+    }
+  })
+  observer.observe(html, options)
+}
 onMounted(() => { 
   prompt_select()
   mobile_tab()
- })
-
+  mutation()
+})
 
 </script>
 
@@ -99,6 +116,10 @@ onMounted(() => {
     padding-top: em(62, 16)
     &::-webkit-scrollbar
       width: 0
+    &.overflow
+      max-width: 100%
+      *
+        max-width: 50%
     :deep(p)
       font: font(22, 32, 400, 'Roboto Flex')
       color: $grey
