@@ -1,5 +1,5 @@
 <template lang="pug">
-.popup(:style='{ top: params.y + "px", left: params.x + "px"}' :class='[params.visible && "active"]')
+.popup(:style='{ top: params.y + "px", left: params.x + "px", zIndex: visible ? "1": "-1"}' :class='[visible && "active"]' ref='popup')
   .popup-close(@click.prevent='close')
     CommonSvgEl(title='close')
   .popup-content
@@ -9,12 +9,17 @@
 
 <script setup>
 
+import { ref, watch } from 'vue'
+
 const props = defineProps({
   payload: { type: Object, required: true },
-  params: { type: Object, required: true }
+  params: { type: Object, required: true },
+  visible: { type: Boolean, default: false }
 })
+const emit = defineEmits(['height', 'close'])
+const popup = ref(null)
+watch(() => props.params, () => setTimeout(() => { emit('height', popup.value.offsetHeight) }, 300), { deep: true })
 
-const emit = defineEmits('close')
 const close = () => {
   emit('close', false)
   document.querySelector('html').style.overflow = 'visible'
@@ -33,9 +38,7 @@ const close = () => {
   padding: em(24, 16)
   max-width: em(440, 16)
   width: 100%
-  transition: .3s
   opacity: 0
-  visibility: hidden
   display: flex
   flex-direction: column
   align-items: flex-end
@@ -56,7 +59,6 @@ const close = () => {
       display: inline
   &.active
     opacity: 1
-    visibility: visible
   @media only screen and (max-width: 576px)
     background: rgba(255, 255, 255, .1)
     backdrop-filter: blur(20px)

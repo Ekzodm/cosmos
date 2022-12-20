@@ -3,7 +3,7 @@
 .articles-text(@scroll='progress')
   .articles-text_item(v-html='data' ref='content')
   .articles-observer(ref='toggle_content')
-ArticlesPromtEl(:payload='promt_search' :params='params' @close='close_promt')
+ArticlesPromtEl(:payload='promt_search' :params='params' :visible='promt_visible' @close='close_promt' @height='get_height')
 </template>
 
 <script setup>
@@ -23,46 +23,43 @@ const content = ref(null)
 const toggle_content = ref(null)
 const percent = ref('0%')
 const promt_search = ref({})
+const promt = ref(0)
+const promt_visible = ref(false)
 const params = ref({})
 const progress = (e) => {
   const { offsetHeight, scrollHeight, scrollTop } = e.target
   percent.value = `${Math.ceil(scrollTop * 100 / ((scrollHeight - offsetHeight) * 2))}%`
   percent.value === '50%' && emit('change', 1)
 }
-const options = ref({})
-if(props.observeMode === 'last') {
-  options.value = {
-    root: null,
-    rootMargin: '0% 0% 0% 0%',
-    threshold: 1
-  }
-} else {
-  options.value = {
-    root: null,
-    rootMargin: '-20% 0% -70% 0%',
-    threshold: 1
-  }
+const options = {
+  root: null,
+  rootMargin: '-20% 0% -70% 0%',
+  threshold: 1
 }
 const prompt_select = () => {
   const prompt_array = content.value.querySelectorAll('.promt')
   for(const i of prompt_array) {
     if ( screen_width.value > 576) {
-      i.addEventListener('mouseover', e => {
-        params.value = { x: +e.layerX + 15, y: +e.layerY + 15, visible: true}
+      i.addEventListener('mouseenter', e => {
         promt_search.value = props.promt.promt.filter(x => x.search.indexOf(e.target.textContent.toLowerCase()) > -1)[0]
+          promt_visible.value = true
+          promt.value + e.target.getBoundingClientRect().top <= window.innerHeight ? params.value = { x: +e.layerX + 15, y: +e.layerY + 15 } : params.value = { x: +e.layerX + 15, y: +e.layerY + 15 - promt.value }
       })
-      i.addEventListener('mouseout', e => {
-        params.value.visible = false
+      i.addEventListener('mouseleave', e => {
+        promt_visible.value = false
+        params.value = { x: +e.layerX + 15, y: +e.layerY + 15 }
       })
     } else {
       i.addEventListener('click', e => {
-        params.value = { x: 0, y: 0, visible: true}
+        promt_visible.value = true
+        params.value = { x: 0, y: 0 }
         promt_search.value = props.promt.promt.filter(x => x.search.indexOf(e.target.textContent.toLowerCase()) > -1)[0]
         document.querySelector('html').style.overflow = 'hidden'
       })
     }
   }
 }
+const get_height = data => promt.value = data
 const close_promt = data => params.value.visible = data
 const mobile_tab = () => {
   if(screen_width.value <= 576 && props.progressItem === 0 && props.id !== 0) {
@@ -75,7 +72,7 @@ const mobile_tab = () => {
           observer.disconnect()
         }
       })
-    }, options.value)
+    }, options)
     !!toggle_content.value && observer.observe(toggle_content.value)
   }
 }

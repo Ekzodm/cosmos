@@ -2,7 +2,7 @@
 main.main
   BannerEl
   DescriptionEl
-  QuoteEl(:payload='{ name: "Андрей Борисенко", description: "летчик-космонавт, Герой России (2012). В 1987 году окончил ленинградский «Военмех», в 2003-2021-х входил в отряд космонавтов. Дважды участвовал в полетах к Международной космической станции.", background: [quote_background_1, quote_background_1_m], image: quote_media_1, class: "first", meteor: quote_meteor_1 }')
+  QuoteEl(:payload='{ name: "Андрей Борисенко", description: "летчик-космонавт, Герой России. В 1987 году окончил ленинградский «Военмех», в 2003-2021-х входил в отряд космонавтов. Дважды участвовал в полетах к Международной космической станции.", background: [quote_background_1, quote_background_1_m], image: quote_media_1, class: "first", meteor: quote_meteor_1 }')
   ArticlesLinkEl(:tab='tab_1' :background='background_1_1' v-if='article_1' :active='0' id='star')
     template(v-slot:content_1)
       ArticlesTextEl(:data='article_1?.content_1' :promt='promt' :progressItem='0')
@@ -24,6 +24,8 @@ main.main
   CommonEl(:payload='payload_5' v-if='article_5')
   DelimiterEl(title='Ключи от будущего' :image='[delimiter5, delimiter5_m]')
   CommonEl(:payload='payload_6' v-if='article_6')
+  .mobile-background
+    img(:src='delimiter5_m')
 </template>
 
 <script setup>
@@ -66,14 +68,14 @@ import article_6 from '@/assets/json/article_6.json'
 import media_1_1 from '@/assets/images/media_1_1.png'
 import media_1_2 from '@/assets/animation/media_1_2.json'
 import media_2_1 from '@/assets/images/media_2_1.png'
-import media_2_2 from '@/assets/images/drilling.png'
+import media_2_2 from '@/assets/animation/media_2_2.json'
 import media_3_1 from '@/assets/images/media_3_1.png'
 import media_3_2 from '@/assets/images/media_3_2.png'
 import media_4_1 from '@/assets/animation/media_4_1.json'
-import media_4_2 from '@/assets/images/media_4_2.png'
+import media_4_2 from '@/assets/animation/media_4_2.json'
 import media_5_1 from '@/assets/images/media_5_1.png'
 import media_5_2 from '@/assets/images/media_5_2.png'
-import media_6_1 from '@/assets/images/media_6_1.png'
+import media_6_1 from '@/assets/animation/media_6_1.json'
 import media_6_2 from '@/assets/images/media_6_2.png'
 
 import media_background_2_1 from '@/assets/images/media_background_2_1.png'
@@ -115,7 +117,7 @@ const payload_2 = ref({
   background: background_2_1,
   article: article_2,
   observe: 'default',
-  media: [{ item: media_2_1, type: 'image', background: media_background_2_1, class_name: 'media21' },{ item: media_2_2, type: 'image' }],
+  media: [{ item: media_2_1, type: 'image', background: media_background_2_1, class_name: 'media21' },{ item: media_2_2, type: 'animation' }],
   promt: promt
 })
 const payload_3 = ref({
@@ -130,7 +132,7 @@ const payload_4 = ref({
   background: background_4_1,
   article: article_4,
   observe: 'default',
-  media: [{ item: media_4_1, type: 'animation' },{ item: media_4_2, type: 'image', background: [media_background_4_2, media_background_4_2_m], class_name: 'media42' }],
+  media: [{ item: media_4_1, type: 'animation' },{ item: media_4_2, type: 'animation', background: [media_background_4_2, media_background_4_2_m], class_name: 'media42' }],
   promt: promt
 })
 const payload_5 = ref({
@@ -145,7 +147,7 @@ const payload_6 = ref({
   background: screen_width > 576 ? background_6_1 : null,
   article: article_6,
   observe: 'last',
-  media: [{ item: media_6_1, type: 'image' },{ item: media_6_2, type: 'image', class_name: 'media62' }],
+  media: [{ item: media_6_1, type: 'animation' },{ item: media_6_2, type: 'image', class_name: 'media62' }],
   promt: promt
 })
 
@@ -156,4 +158,11 @@ main
   padding-bottom: em(28, 16)
   @media only screen and (max-width: 576px)
     overflow: hidden
+.mobile-background
+  height: 100vh
+  display: none
+  width: 100%
+  @media only screen and (max-width: 576px)
+    display: block
+
 </style>
