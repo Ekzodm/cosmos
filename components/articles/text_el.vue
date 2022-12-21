@@ -1,6 +1,6 @@
 <template lang="pug">
 .articles-progress(:style='{ width: percent, left: !!progressItem ? "50%" : "0" }')
-.articles-text(@scroll='progress' :class='[overflow && "overflow"]')
+.articles-text(@scroll='progress')
   .articles-text_item(v-html='data' ref='content')
   .articles-observer(ref='toggle_content')
 ArticlesPromtEl(:payload='promt_search' :params='params' :visible='promt_visible' @close='close_promt' @height='get_height')
@@ -32,7 +32,7 @@ const progress = (e) => {
   const { offsetHeight, scrollHeight, scrollTop } = e.target
   percent.value = `${Math.ceil(scrollTop * 100 / ((scrollHeight - offsetHeight) * 2))}%`
   percent.value === '50%' && props.progressItem === 0 && emit('change', 1)
-  percent.value === '50%' && props.progressItem === 1 && ([...document.querySelector('main')].children[wheel.value].dataset.scroll = true, overflow.value = false)
+  percent.value === '50%' && props.progressItem === 1 && (document.querySelector(`[data-index='${wheel.value}']`).dataset.scroll = true)
 }
 const options = {
   root: null,

@@ -156,7 +156,7 @@ const options = {
   threshold: .5
 }
 const wheel_index = ref(0)
-provide('wheel', wheel_index.value)
+provide('wheel', wheel_index)
 const article_observer = () => {
   if(screen_width <= 576) return false
   window.scrollTo(0, 0)
@@ -164,12 +164,12 @@ const article_observer = () => {
   const article = [...document.querySelector('main').children]
   article.forEach((i, idx) => {
     i.setAttribute('data-index', idx)
-    idx === 7 || idx === 9 ? i.dataset.scroll = false : i.dataset.scroll = true
+    idx === 7 || idx === 9 || idx === 11 || idx === 13 || idx === 15 ? i.dataset.scroll = false : i.dataset.scroll = true
   })
   const flag = ref(true)
   const height = article[0].offsetHeight
   document.addEventListener('wheel', e => {
-    if(document.querySelector(`[data-index='${wheel_index.value}']`).dataset.scroll) {
+    if(document.querySelector(`[data-index='${wheel_index.value}']`).dataset.scroll === 'true') {
       if(!flag.value) return
       flag.value = false
       if(e.deltaY > 0) {
