@@ -57,7 +57,7 @@ const article_observer = () => {
   }, options)
   observer.observe(article.value)
 }
-onMounted(() => article_observer())
+// onMounted(() => article_observer())
 
 </script>
 

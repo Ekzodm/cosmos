@@ -66,10 +66,12 @@ const close = () => {
     top: 0 !important
     left: 0 !important
     padding: 0 em(20, 16)
+    translate: .3s
     height: 100vh
     border-radius: 0
     box-shadow: none
     z-index: 1000
+    visibility: hidden
     &-close
       display: block
     &-content
@@ -82,4 +84,6 @@ const close = () => {
         font: font(20, 28, 400, 'Roboto Flex')
       p
         font: font(16, 24, 400, 'Roboto Flex')
+    &.active
+      visibility: visible
 </style>

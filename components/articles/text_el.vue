@@ -31,7 +31,7 @@ const progress = (e) => {
   const { offsetHeight, scrollHeight, scrollTop } = e.target
   percent.value = `${Math.ceil(scrollTop * 100 / ((scrollHeight - offsetHeight) * 2))}%`
   percent.value === '50%' && props.progressItem === 0 && emit('change', 1)
-  percent.value === '50%' && props.progressItem === 1 && (document.querySelector('html').style.overflowY = 'visible', overflow.value = false)
+  // percent.value === '50%' && props.progressItem === 1 && (document.querySelector('html').style.overflowY = 'visible', overflow.value = false)
 }
 const options = {
   root: null,
@@ -62,7 +62,7 @@ const prompt_select = () => {
   }
 }
 const get_height = data => promt.value = data
-const close_promt = data => params.value.visible = data
+const close_promt = data => promt_visible.value = data
 const mobile_tab = () => {
   if(screen_width.value <= 576 && props.progressItem === 0 && props.id !== 0) {
     const observer = new IntersectionObserver((entries, observer) => {
@@ -96,7 +96,7 @@ const mutation = () => {
 onMounted(() => { 
   prompt_select()
   mobile_tab()
-  mutation()
+  // mutation()
 })
 
 </script>
