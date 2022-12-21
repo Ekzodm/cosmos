@@ -37,27 +37,6 @@ const tab_value = data => {
   index.value = data
   emit('progress', data)
 }
-const article_observer = () => {
-  if(screen_width <= 576) return false
-  const options = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.99
-  }
-  const html = document.querySelector('html')
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      console.log(entry.intersectionRatio)
-      if (entry.isIntersecting) {
-        html.style.overflowY = 'hidden'
-        observer.unobserve(entry.target)
-      }
-
-    })
-  }, options)
-  observer.observe(article.value)
-}
-// onMounted(() => article_observer())
 
 </script>
 
@@ -66,11 +45,14 @@ const article_observer = () => {
   height: 100vh
   position: relative
   z-index: 10
+  overflow: hidden
   &-wrapper
     display: flex
     align-items: center
+    height: calc(100vh - em(65, 16))
     &_content
       width: 100%
+      height: inherit
     &_media
       position: absolute
       right: 0

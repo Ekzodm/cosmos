@@ -74,17 +74,14 @@ onMounted(() => {
     .articles-media_image
       position: relative
       left: 5%
-.media31
-  .articles-media
-    &_background
-      img
-        object-fit: cover
-    &_image
-      width: 65%
-      margin: 0 auto
-  @media only screen and (max-width: 576px)
-    left: 0
-    width: 100%
+// .media31
+//   .articles-media
+//     &_background
+//       img
+//         object-fit: cover
+//   @media only screen and (max-width: 576px)
+//     left: 0
+//     width: 100%
 .media42
   @media only screen and (max-width: 576px)
     .articles-media_background

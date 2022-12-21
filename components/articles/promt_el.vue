@@ -1,6 +1,6 @@
 <template lang="pug">
-.popup(:style='{ top: params.y + "px", left: params.x + "px", zIndex: visible ? "1": "-1"}' :class='[visible && "active"]' ref='popup')
-  .popup-close(@click.prevent='close')
+.popup(:style='{ top: params.y + "px", left: params.x + "px", zIndex: visible ? "1": "-1"}' :class='[visible && "active"]' ref='popup' @click.prevent='close')
+  .popup-close
     CommonSvgEl(title='close')
   .popup-content
     h4 {{payload?.title}}
@@ -9,21 +9,24 @@
 
 <script setup>
 
-import { ref, watch } from 'vue'
+import { ref, watch, inject } from 'vue'
 
 const props = defineProps({
   payload: { type: Object, required: true },
   params: { type: Object, required: true },
   visible: { type: Boolean, default: false }
 })
+const screen_width = inject('screen_width')
 const emit = defineEmits(['height', 'close'])
 const popup = ref(null)
 watch(() => props.params, () => setTimeout(() => { emit('height', popup.value.offsetHeight) }, 300), { deep: true })
 
 const close = () => {
+  if(screen_width > 576) return false
   emit('close', false)
   document.querySelector('html').style.overflow = 'visible'
 }
+
 
 </script>
 

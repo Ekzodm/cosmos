@@ -30,7 +30,7 @@ main.main
 
 <script setup>
 
-import { ref, computed, provide } from 'vue'
+import { ref, computed, provide, onMounted } from 'vue'
 
 const tab_1 = [{ to: 'star', title: 'На пути к звёздам' }, { to: 'bosom', title: 'На пути к недрам' }]
 const tab_2 = [{ title: 'Цели полёта', id: 10 }, { title: 'Цели бурения', id: 11 }]
@@ -69,7 +69,7 @@ import media_1_1 from '@/assets/images/media_1_1.png'
 import media_1_2 from '@/assets/animation/media_1_2.json'
 import media_2_1 from '@/assets/images/media_2_1.png'
 import media_2_2 from '@/assets/animation/media_2_2.json'
-import media_3_1 from '@/assets/images/media_3_1.png'
+import media_3_1 from '@/assets/animation/media_3_1.json'
 import media_3_2 from '@/assets/images/media_3_2.png'
 import media_4_1 from '@/assets/animation/media_4_1.json'
 import media_4_2 from '@/assets/animation/media_4_2.json'
@@ -124,7 +124,7 @@ const payload_3 = ref({
   tab: tab_3,
   article: article_3,
   observe: 'default',
-  media: [{ item: media_3_1, type: 'image', background: [media_background_3_1, media_background_3_1_m], class_name: 'media31' },{ item: media_3_2, type: 'image', class_name: 'scale' }],
+  media: [{ item: media_3_1, type: 'animation', background: [media_background_3_1, media_background_3_1_m], class_name: 'media31' },{ item: media_3_2, type: 'image', class_name: 'scale' }],
   promt: promt
 })
 const payload_4 = ref({
@@ -150,18 +150,59 @@ const payload_6 = ref({
   media: [{ item: media_6_1, type: 'animation' },{ item: media_6_2, type: 'image', class_name: 'media62' }],
   promt: promt
 })
+const options = {
+  root: null,
+  rootMargin: '0px',
+  threshold: .5
+}
+const wheel_index = ref(0)
+provide('wheel', wheel_index.value)
+const article_observer = () => {
+  if(screen_width <= 576) return false
+  window.scrollTo(0, 0)
+  const main = document.querySelector('main')
+  const article = [...document.querySelector('main').children]
+  article.forEach((i, idx) => {
+    i.setAttribute('data-index', idx)
+    idx === 7 || idx === 9 ? i.dataset.scroll = false : i.dataset.scroll = true
+  })
+  const flag = ref(true)
+  const height = article[0].offsetHeight
+  document.addEventListener('wheel', e => {
+    if(document.querySelector(`[data-index='${wheel_index.value}']`).dataset.scroll) {
+      if(!flag.value) return
+      flag.value = false
+      if(e.deltaY > 0) {
+        wheel_index.value < article.length - 2 ? wheel_index.value += 1 : wheel_index.value = article.length - 2
+      } else {
+        wheel_index.value > 0 ? wheel_index.value -= 1 : wheel_index.value = 0
+      }
+      main.style.transform = `translateY(${-height * wheel_index.value}px)`
+      console.log(wheel_index.value)
+      setTimeout(() => flag.value = true, 1000)
+    } else {
+      return false
+    }
+  })
+}
+onMounted(() => article_observer())
 
 </script>
 
 <style lang="sass" scoped>
 main
   padding-bottom: em(28, 16)
+  transition: .5s
   @media only screen and (max-width: 576px)
     overflow: hidden
 .mobile-background
-  height: 100vh
+  height: 70vh
   display: none
   width: 100%
+  img
+    object-fit: cover
+    width: 100%
+    height: inherit
   @media only screen and (max-width: 576px)
     display: block
 
