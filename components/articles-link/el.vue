@@ -53,13 +53,15 @@ watch(() => index.value, () => { emit('changeIndex', index.value) }, { deep: tru
     img
       width: 100%
   @media only screen and (max-width: 576px)
-    overflow: hidden
+    overflow-y: visible
+    overflow-x: hidden
     height: auto
     .container
       flex-direction: column
       order: 3
     &-wrapper
       flex-direction: column
+      height: auto
       &_media
         position: relative
         width: 100%

@@ -1,5 +1,5 @@
-import LottieAnimation from "lottie-web-vue"
+import Vue3Lottie from 'vue3-lottie'
 
-export default defineNuxtPlugin(nuxtApp => {
-  nuxtApp.vueApp.use(LottieAnimation)
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.use(Vue3Lottie)
 })

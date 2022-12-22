@@ -53,6 +53,7 @@ const tab_value = data => {
     &_content
       width: 100%
       height: inherit
+      margin-top: em(-100, 16)
     &_media
       position: absolute
       right: 0
@@ -69,11 +70,16 @@ const tab_value = data => {
       width: 100%
   @media only screen and (max-width: 576px)
     height: auto
+    overflow-y: visible
+    overflow-x: hidden
     .container
       flex-direction: column
       order: 3
     &-wrapper
       flex-direction: column
+      height: auto
+      &_content
+        margin-top: 0
       &_media
         position: relative
         width: 100%

@@ -16,7 +16,7 @@
     "sass-loader": "^13.2.0"
   },
   "dependencies": {
-    "lottie-web-vue": "^2.0.6",
-    "pinia": "^2.0.28"
+    "pinia": "^2.0.28",
+    "vue3-lottie": "^2.4.0"
   }
 }

@@ -1,17 +1,25 @@
 <template lang="pug">
 nav.articles-nav
-  ul.articles-nav_list.container 
-    li.articles-nav_list-item(v-for='item, idx in tab' :key='idx' :class='[+idx === +activeIndex && "active"]' @click='change(item.index)') {{item.title}}
+  ul.articles-nav_list.container
+    template(v-if='screen_width > 567')
+      li.articles-nav_list-item(v-for='item, idx in tab' :key='idx' :class='[+idx === +activeIndex && "active"]' @click='change(item.index)') {{item.title}}
+    template(v-else)
+      li.articles-nav_list-item(v-for='item, idx in tab' :key='idx' :class='[+idx === +activeIndex && "active"]')
+        a.articles-nav_list-link(:href='`#${item.to}`') {{item.title}}
 </template>
 
 <script setup>
+
+import { inject } from 'vue'
 
 const props = defineProps({
   tab: { type: Array, default: [] },
   activeIndex: { type: Number }
 })
 const emit = defineEmits(['changeIndex'])
+const screen_width = inject('screen_width')
 const change = idx => { 
+  if(screen_width.value > 576) return false
   emit('changeIndex', idx)
   const main = document.querySelector('main')
   const article = [...document.querySelector('main').children]

@@ -1,13 +1,15 @@
 <template lang="pug">
 .articles-media(:class='className' ref='observe')
-  .articles-media_background(v-if='!!background')
-    img(:src='toggle_image')
-  img.articles-media_image(v-if='type === "image"' :src='media' ali='image' )
-  LottieAnimation(v-else ref='anim' :animationData='media' :autoplay='false')
+  ClientOnly
+    .articles-media_background(v-if='!!background')
+      img(:src='toggle_image')
+    img.articles-media_image(v-if='type === "image"' :src='media' ali='image' )
+    Vue3Lottie(v-else ref='anim' :animationData='media' :autoplay='false')
 </template>
 
 <script setup>
 
+import 'vue3-lottie/dist/style.css'
 import { ref, onMounted, inject } from 'vue'
 
 const props = defineProps({

@@ -5,13 +5,13 @@ main.main
   QuoteEl(:payload='{ name: "Андрей Борисенко", description: "летчик-космонавт, Герой России. В 1987 году окончил ленинградский «Военмех», в 2003-2021-х входил в отряд космонавтов. Дважды участвовал в полетах к Международной космической станции.", background: [quote_background_1, quote_background_1_m], image: quote_media_1, class: "first", meteor: quote_meteor_1 }')
   ArticlesLinkEl(:tab='tab_1' :background='background_1_1' v-if='article_1' :active='0' id='star' @changeIndex='toggle_tab')
     template(v-slot:content_1)
-      ArticlesTextEl(:data='article_1?.content_1' :promt='promt' :progressItem='0')
+      ArticlesLinkTextEl(:data='article_1?.content_1' :promt='promt' :progressItem='0')
     template(v-slot:media_1)
       ArticlesMediaEl(:media='media_1_1' className='animate1')
-  QuoteEl(:payload='{ name: "Александр Угрюмов", description: "руководитель блока по разработке трудноизвлекаемых запасов «Газпромнефть-Технологических партнерств». С отличием окончил геологический факультет РГУ нефти и газа имени И. М. Губкина. Имеет две магистерские степени по разработке месторождений Университета Хериота-Уатта (Эдинбург, Шотландия). Работал в ведущих российских и международных нефтегазовых компаниях.", background: [quote_background_2, quote_background_2_m], image: quote_media_2, class: "second", meteor: quote_meteor_2 }')
+  QuoteEl(:payload='{ name: "Александр Угрюмов", description: "руководитель блока по разработке трудноизвлекаемых запасов «Газпромнефть-Технологические Партнерства». С отличием окончил геологический факультет РГУ нефти и газа имени И. М. Губкина. Имеет две магистерские степени по разработке месторождений Университета Хериота-Уатта (Эдинбург, Шотландия). Работал в ведущих российских и международных нефтегазовых компаниях.", background: [quote_background_2, quote_background_2_m], image: quote_media_2, class: "second", meteor: quote_meteor_2 }')
   ArticlesLinkEl(:tab='tab_1' :background_2='background_1_2' v-if='article_1' :active='1' id='bosom' @changeIndex='toggle_tab')
     template(v-slot:content_1)
-      ArticlesTextEl(:data='article_1?.content_2' :promt='promt' :progressItem='1')
+      ArticlesLinkTextEl(:data='article_1?.content_2' :promt='promt' :progressItem='1')
     template(v-slot:media_1)
       ArticlesMediaEl(:media='media_1_2' type='animation')
   DelimiterEl(title='Выбор курса' :image='[delimiter1, delimiter1_m]')
@@ -24,8 +24,7 @@ main.main
   CommonEl(:payload='payload_5' v-if='article_5')
   DelimiterEl(title='Ключи от будущего' :image='[delimiter5, delimiter5_m]')
   CommonEl(:payload='payload_6' v-if='article_6')
-  .mobile-background
-    img(:src='delimiter5_m')
+  FooterEl(:background='[delimiter5, delimiter5_m]')
 </template>
 
 <script setup>
@@ -159,31 +158,35 @@ const wheel_index = ref(0)
 provide('wheel', wheel_index)
 const toggle_tab = data => wheel_index.value = data
 const article_observer = () => {
-  if(screen_width <= 576) return false
+  if(screen_width.value <= 576) return false
   window.scrollTo(0, 0)
   const main = document.querySelector('main')
   const article = [...document.querySelector('main').children]
   article.forEach((i, idx) => {
     i.setAttribute('data-index', idx)
-    idx === 3 || idx === 5 || idx === 7 || idx === 9 || idx === 11 || idx === 13 || idx === 15 ? i.dataset.scroll = false : i.dataset.scroll = true
+    if(idx === 3 || idx === 5 || idx === 7 || idx === 9 || idx === 11 || idx === 13 || idx === 15) {
+      i.dataset.scroll = false
+      i.querySelectorAll('.articles-text').forEach(x=> x.classList.add('overflow'))
+    } else {
+      i.dataset.scroll = true
+    }
   })
   const flag = ref(true)
   const height = article[0].offsetHeight
   document.addEventListener('wheel', e => {
-    if(document.querySelector(`[data-index='${wheel_index.value}']`).dataset.scroll === 'true') {
       if(!flag.value) return
       flag.value = false
       if(e.deltaY > 0) {
-        wheel_index.value < article.length - 2 ? wheel_index.value += 1 : wheel_index.value = article.length - 2
+        if(document.querySelector(`[data-index='${wheel_index.value}']`).dataset.scroll === 'true' && e.target.tagName !== 'P') {
+          wheel_index.value < article.length - 1 ? wheel_index.value += 1 : wheel_index.value = article.length - 1
+        }
       } else {
-        wheel_index.value > 0 ? wheel_index.value -= 1 : wheel_index.value = 0
+        if(e.target.tagName !== 'P') {
+          wheel_index.value > 0 ? wheel_index.value -= 1 : wheel_index.value = 0
+        }
       }
       main.style.transform = `translateY(${-height * wheel_index.value}px)`
-      console.log(wheel_index.value)
-      setTimeout(() => flag.value = true, 1000)
-    } else {
-      return false
-    }
+      setTimeout(() => flag.value = true, 750)
   })
 }
 onMounted(() => article_observer())
@@ -192,19 +195,7 @@ onMounted(() => article_observer())
 
 <style lang="sass" scoped>
 main
-  padding-bottom: em(28, 16)
   transition: .5s
   @media only screen and (max-width: 576px)
     overflow: hidden
-.mobile-background
-  height: 70vh
-  display: none
-  width: 100%
-  img
-    object-fit: cover
-    width: 100%
-    height: inherit
-  @media only screen and (max-width: 576px)
-    display: block
-
 </style>
