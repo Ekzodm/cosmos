@@ -1,8 +1,8 @@
 <template lang="pug">
 section.articles
-  ArticlesLinkTabEl(:tab='tab' @change='tab_value' :percent='percent' :activeIndex='active')
+  ArticlesLinkTabEl(:tab='tab' @changeIndex='tab_value' :percent='percent' :activeIndex='active')
   transition(name='fade' mode='out-in')
-    .articles-wrapper(v-if='index === 0')
+    .articles-wrapper
       .articles-background(v-if='!!background')
         img(:src='background' alt='background')
       .container
@@ -10,17 +10,11 @@ section.articles
           slot(name='content_1')
       .articles-wrapper_media
         slot(name='media_1')
-    .articles-wrapper(v-else)
-      .container
-        .articles-wrapper_content
-          slot(name='content_2')
-      .articles-wrapper_media
-        slot(name='media_2')
 </template>
 
 <script setup>
 
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const props = defineProps({
   tab: { type: Array, default: [] },
@@ -28,9 +22,10 @@ const props = defineProps({
   background: { type: String, default: '' },
   active: { type: Number }
 })
+const emit = defineEmits('changeIndex')
 const index = ref(0)
 const tab_value = data => index.value = data
-
+watch(() => index.value, () => { emit('changeIndex', index.value) }, { deep: true })
 </script>
 
 <style lang="sass" scoped>

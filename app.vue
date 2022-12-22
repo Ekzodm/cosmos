@@ -3,13 +3,13 @@ main.main
   BannerEl
   DescriptionEl
   QuoteEl(:payload='{ name: "Андрей Борисенко", description: "летчик-космонавт, Герой России. В 1987 году окончил ленинградский «Военмех», в 2003-2021-х входил в отряд космонавтов. Дважды участвовал в полетах к Международной космической станции.", background: [quote_background_1, quote_background_1_m], image: quote_media_1, class: "first", meteor: quote_meteor_1 }')
-  ArticlesLinkEl(:tab='tab_1' :background='background_1_1' v-if='article_1' :active='0' id='star')
+  ArticlesLinkEl(:tab='tab_1' :background='background_1_1' v-if='article_1' :active='0' id='star' @changeIndex='toggle_tab')
     template(v-slot:content_1)
       ArticlesTextEl(:data='article_1?.content_1' :promt='promt' :progressItem='0')
     template(v-slot:media_1)
       ArticlesMediaEl(:media='media_1_1' className='animate1')
   QuoteEl(:payload='{ name: "Александр Угрюмов", description: "руководитель блока по разработке трудноизвлекаемых запасов «Газпромнефть-Технологических партнерств». С отличием окончил геологический факультет РГУ нефти и газа имени И. М. Губкина. Имеет две магистерские степени по разработке месторождений Университета Хериота-Уатта (Эдинбург, Шотландия). Работал в ведущих российских и международных нефтегазовых компаниях.", background: [quote_background_2, quote_background_2_m], image: quote_media_2, class: "second", meteor: quote_meteor_2 }')
-  ArticlesLinkEl(:tab='tab_1' :background_2='background_1_2' v-if='article_1' :active='1' id='bosom')
+  ArticlesLinkEl(:tab='tab_1' :background_2='background_1_2' v-if='article_1' :active='1' id='bosom' @changeIndex='toggle_tab')
     template(v-slot:content_1)
       ArticlesTextEl(:data='article_1?.content_2' :promt='promt' :progressItem='1')
     template(v-slot:media_1)
@@ -32,7 +32,7 @@ main.main
 
 import { ref, computed, provide, onMounted } from 'vue'
 
-const tab_1 = [{ to: 'star', title: 'На пути к звёздам' }, { to: 'bosom', title: 'На пути к недрам' }]
+const tab_1 = [{ to: 'star', title: 'На пути к звёздам', index: 3 }, { to: 'bosom', title: 'На пути к недрам', index: 5 }]
 const tab_2 = [{ title: 'Цели полёта', id: 10 }, { title: 'Цели бурения', id: 11 }]
 const tab_3 = [{ title: 'Управление полётом', id: 12 }, { title: 'Управление бурением', id: 13 }]
 const tab_4 = [{ title: 'Подготовка к взлёту', id: 14 }, { title: 'Подготовка к бурению', id: 15 }]
@@ -157,6 +157,7 @@ const options = {
 }
 const wheel_index = ref(0)
 provide('wheel', wheel_index)
+const toggle_tab = data => wheel_index.value = data
 const article_observer = () => {
   if(screen_width <= 576) return false
   window.scrollTo(0, 0)
@@ -164,7 +165,7 @@ const article_observer = () => {
   const article = [...document.querySelector('main').children]
   article.forEach((i, idx) => {
     i.setAttribute('data-index', idx)
-    idx === 7 || idx === 9 || idx === 11 || idx === 13 || idx === 15 ? i.dataset.scroll = false : i.dataset.scroll = true
+    idx === 3 || idx === 5 || idx === 7 || idx === 9 || idx === 11 || idx === 13 || idx === 15 ? i.dataset.scroll = false : i.dataset.scroll = true
   })
   const flag = ref(true)
   const height = article[0].offsetHeight

@@ -31,8 +31,8 @@ const overflow = ref(false)
 const progress = (e) => {
   const { offsetHeight, scrollHeight, scrollTop } = e.target
   percent.value = `${Math.ceil(scrollTop * 100 / ((scrollHeight - offsetHeight) * 2))}%`
-  percent.value === '50%' && props.progressItem === 0 && emit('change', 1)
-  percent.value === '50%' && props.progressItem === 1 && (document.querySelector(`[data-index='${wheel.value}']`).dataset.scroll = true)
+  percent.value === '50%' && props.progressItem === 0 && (document.querySelector(`[data-index='${wheel.value}']`).dataset.scroll = true, emit('change', 1))
+  percent.value === '50%' && props.progressItem === 1 && (document.querySelector(`[data-index='${wheel.value}']`).dataset.scroll = true, e.target.classList.remove('overflow'))
 }
 const options = {
   root: null,
@@ -46,7 +46,8 @@ const prompt_select = () => {
       i.addEventListener('mouseenter', e => {
         promt_search.value = props.promt.promt.filter(x => x.search.indexOf(e.target.textContent.toLowerCase()) > -1)[0]
           promt_visible.value = true
-          promt.value + e.target.getBoundingClientRect().top <= window.innerHeight ? params.value = { x: +e.layerX + 15, y: +e.layerY + 15 } : params.value = { x: +e.layerX + 15, y: +e.layerY - 15 - promt.value }
+          promt.value + e.target.getBoundingClientRect().top <= window.innerHeight ? params.value = { x: +e.layerX + 15, y: +e.target.getBoundingClientRect().top + 15 } : params.value = { x: +e.layerX + 15, y: +e.target.getBoundingClientRect().top - 15 - promt.value }
+          console.log(e.layerY)
       })
       i.addEventListener('mouseleave', e => {
         promt_visible.value = false
