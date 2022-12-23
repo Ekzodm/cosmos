@@ -1,11 +1,8 @@
 <template lang="pug">
 nav.articles-nav
   ul.articles-nav_list.container
-    template(v-if='screen_width > 567')
-      li.articles-nav_list-item(v-for='item, idx in tab' :key='idx' :class='[+idx === +activeIndex && "active"]' @click='change(item.index)') {{item.title}}
-    template(v-else)
-      li.articles-nav_list-item(v-for='item, idx in tab' :key='idx' :class='[+idx === +activeIndex && "active"]')
-        a.articles-nav_list-link(:href='`#${item.to}`') {{item.title}}
+    li.articles-nav_list-item(v-for='item, idx in tab' :key='idx' :class='[+idx === +activeIndex && "active"]' @click.prevent='change(item.index, item.to)') {{item.title}}
+
 </template>
 
 <script setup>
@@ -18,13 +15,17 @@ const props = defineProps({
 })
 const emit = defineEmits(['changeIndex'])
 const screen_width = inject('screen_width')
-const change = idx => { 
-  if(screen_width.value > 576) return false
-  emit('changeIndex', idx)
-  const main = document.querySelector('main')
+const change = (idx, to) => {
   const article = [...document.querySelector('main').children]
   const height = article[0].offsetHeight
-  main.style.transform = `translateY(${-height * idx}px)`
+  if(screen_width.value > 576) {
+    emit('changeIndex', idx)
+    const main = document.querySelector('main')
+    main.style.transform = `translateY(${-height * idx}px)`
+  } else {
+    document.querySelector(`#{to}`).scrollIntoView()
+  }
+
 }
 
 </script>

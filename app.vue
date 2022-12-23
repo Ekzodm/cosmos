@@ -156,7 +156,7 @@ const options = {
 }
 const wheel_index = ref(0)
 provide('wheel', wheel_index)
-const toggle_tab = data => wheel_index.value = data
+const toggle_tab = data => { wheel_index.value = data, console.log(data + 'emit')}
 const article_observer = () => {
   if(screen_width.value <= 576) return false
   window.scrollTo(0, 0)
@@ -173,20 +173,20 @@ const article_observer = () => {
   })
   const flag = ref(true)
   const height = article[0].offsetHeight
-  document.addEventListener('wheel', e => {
-      if(!flag.value) return
-      flag.value = false
-      if(e.deltaY > 0) {
-        if(document.querySelector(`[data-index='${wheel_index.value}']`).dataset.scroll === 'true' && e.target.tagName !== 'P') {
-          wheel_index.value < article.length - 1 ? wheel_index.value += 1 : wheel_index.value = article.length - 1
-        }
-      } else {
-        if(e.target.tagName !== 'P') {
-          wheel_index.value > 0 ? wheel_index.value -= 1 : wheel_index.value = 0
-        }
+  window.addEventListener('wheel', e => {
+    if(!flag.value) return
+    flag.value = false
+    if(e.deltaY > 0) {
+      if(article[wheel_index.value].dataset.scroll === 'true' && e.target.tagName !== 'P') {
+        wheel_index.value < article.length - 1 ? wheel_index.value += 1 : wheel_index.value = article.length - 1
       }
-      main.style.transform = `translateY(${-height * wheel_index.value}px)`
-      setTimeout(() => flag.value = true, 750)
+    } else {
+      if(e.target.tagName !== 'P') {
+        wheel_index.value > 0 ? wheel_index.value -= 1 : wheel_index.value = 0
+      }
+    }
+    main.style.transform = `translateY(${-height * wheel_index.value}px)`
+    setTimeout(() => flag.value = true, 500)
   })
 }
 onMounted(() => article_observer())

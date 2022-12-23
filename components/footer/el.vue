@@ -7,8 +7,6 @@ footer.footer
       img(src='@/assets/images/logo.png' alt='Naked Science')
     ul.footer-dev_list
       li.footer-dev_list-item(v-for='item, idx in dev' :key='idx') {{item}}
-    span.footer-description Редакция благодарит за помощь и консультации при подготовке проекта космонавта Андрея Борисенко и директора по развитию разработки трудноизвлекаемых запасов «Газпромнефть — Технологических партнерство» Александра Угрюмова.
-    span.footer-right © 2022, Naked Science. Все права защищены.
     ul.footer-social_list
       li.footer-social_list-item(v-for='item, idx in social' :key='idx')
         template(v-if='item === "link"')
@@ -16,6 +14,8 @@ footer.footer
         template(v-else)
           a.footer-social_list-link(href='/')
             CommonSvgEl(:title='item')
+    span.footer-description Редакция благодарит за помощь и консультации при подготовке проекта космонавта Андрея Борисенко и директора по развитию разработки трудноизвлекаемых запасов «Газпромнефть — Технологические партнерство» Александра Угрюмова.
+    span.footer-right © 2022, Naked Science. Все права защищены.
 </template>
 
 <script setup>
@@ -50,7 +50,7 @@ onMounted(() => toggle_image.value = Array.isArray(props.background) ? (screen_w
   align-items: center
   &-logo
     img
-      max-width: em(300, 16)
+      max-width: em(240, 16)
       width: 100%
   &-background
     position: absolute

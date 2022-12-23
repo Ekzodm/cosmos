@@ -14,18 +14,14 @@ section.articles
 
 <script setup>
 
-import { ref, watch } from 'vue'
-
 const props = defineProps({
   tab: { type: Array, default: [] },
   percent: { type: String, default: '0%' },
   background: { type: String, default: '' },
   active: { type: Number }
 })
-const emit = defineEmits('changeIndex')
-const index = ref(0)
-const tab_value = data => index.value = data
-watch(() => index.value, () => { emit('changeIndex', index.value) }, { deep: true })
+const emit = defineEmits(['changeIndex'])
+const tab_value = data => emit('changeIndex', data)
 </script>
 
 <style lang="sass" scoped>
