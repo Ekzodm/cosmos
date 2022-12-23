@@ -24,7 +24,7 @@ const props = defineProps({
 })
 const screen_width = inject('screen_width')
 const dev = ['Текст: Иван Ортега', 'Корректор: Мария Назарова', 'Выпускающий редактор: Егор Быковский', 'Проект-менеджер: Руслан Зораб', 'Дизайнер: Марина Саргсян', 'Иллюстратор: Ярослав Демидов', 'Аниматор: Ярослав Демидов', 'Программирование: Дмитрий Пырялин']
-const social = ['telegram', 'vk', 'ok', 'twitter']
+const social = ['telegram', 'vk', 'ok', 'twitter', 'link']
 const toggle_image = ref(null)
 onMounted(() => toggle_image.value = Array.isArray(props.background) ? (screen_width.value > 576 ? props.background[0] : props.background[1]) : props.background)
 </script>
