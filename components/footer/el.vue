@@ -11,8 +11,11 @@ footer.footer
     span.footer-right © 2022, Naked Science. Все права защищены.
     ul.footer-social_list
       li.footer-social_list-item(v-for='item, idx in social' :key='idx')
-        a.footer-social_list-link(href='/')
-          CommonSvgEl(:title='item')
+        template(v-if='item === "link"')
+          CommonSvgEl(:title='item' @click='copy_link')
+        template(v-else)
+          a.footer-social_list-link(href='/')
+            CommonSvgEl(:title='item')
 </template>
 
 <script setup>
@@ -26,6 +29,15 @@ const screen_width = inject('screen_width')
 const dev = ['Текст: Иван Ортега', 'Корректор: Мария Назарова', 'Выпускающий редактор: Егор Быковский', 'Проект-менеджер: Руслан Зораб', 'Дизайнер: Марина Саргсян', 'Иллюстратор: Ярослав Демидов', 'Аниматор: Ярослав Демидов', 'Программирование: Дмитрий Пырялин']
 const social = ['telegram', 'vk', 'ok', 'twitter', 'link']
 const toggle_image = ref(null)
+const copy_link = () => {
+  navigator.clipboard.writeText(document.location.href)
+  .then(text => {
+    console.log('Ссылка скопирована')
+  })
+  .catch(err => {
+    console.log('Ошибка копирования', err);
+  })
+}
 onMounted(() => toggle_image.value = Array.isArray(props.background) ? (screen_width.value > 576 ? props.background[0] : props.background[1]) : props.background)
 </script>
 
@@ -78,16 +90,18 @@ onMounted(() => toggle_image.value = Array.isArray(props.background) ? (screen_w
       display: flex
       align-items: center
       gap: em(15, 16)
+      &-item
+        display: flex
+        cursor: pointer
       &-link
         display: flex
-        :deep(svg)
-          width: em(48, 16)
-          height: em(48, 16)
+      :deep(svg)
+        width: em(48, 16)
+        height: em(48, 16)
   @media only screen and (max-width: 576px)
     &-social
       &_list
-        &-link
-          :deep(svg)
-            width: em(35, 16)
-            height: em(35, 16)
+        :deep(svg)
+          width: em(35, 16)
+          height: em(35, 16)
 </style>
