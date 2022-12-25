@@ -1,5 +1,5 @@
 <template lang="pug">
-main.main
+main.main(ref='main' :style='{ transform: `translateY(${transformY}px)`}')
   BannerEl
   DescriptionEl
   QuoteEl(:payload='{ name: "Андрей Борисенко", description: "летчик-космонавт, Герой России. В 1987 году окончил ленинградский «Военмех», в 2003-2021-х входил в отряд космонавтов. Дважды участвовал в полетах к Международной космической станции.", background: [quote_background_1, quote_background_1_m], image: quote_media_1, class: "first", meteor: quote_meteor_1 }')
@@ -29,7 +29,7 @@ main.main
 
 <script setup>
 
-import { ref, computed, provide, onMounted } from 'vue'
+import { ref, computed, provide, onMounted, watch } from 'vue'
 
 const tab_1 = [{ to: 'star', title: 'На пути к звёздам', index: 3 }, { to: 'bosom', title: 'На пути к недрам', index: 5 }]
 const tab_2 = [{ title: 'Цели полёта', id: 10 }, { title: 'Цели бурения', id: 11 }]
@@ -154,9 +154,46 @@ const options = {
   rootMargin: '0px',
   threshold: .5
 }
+
+const main = ref(null)
 const wheel_index = ref(0)
+const transformY = ref(0)
+const flag = ref(true)
 provide('wheel', wheel_index)
-const toggle_tab = data => { wheel_index.value = data, console.log(data + 'emit')}
+const toggle_tab = data => { wheel_index.value = data }
+const wheel_action = (e, el, height_el, controller) => {
+  if (!flag.value) return
+  flag.value = false
+  if(e.deltaY > 0) {
+    el[wheel_index.value].dataset.scroll === 'true' ? (wheel_index.value < el.length - 1 ? wheel_index.value += 1 : wheel_index.value = el.length - 1) : false
+    console.log(wheel_index.value)
+  } else {
+    wheel_index.value > 0 ? wheel_index.value -= 1 : wheel_index.value = 0
+  }
+  transformY.value = -height_el * wheel_index.value
+  setTimeout(() => flag.value = true, 500)
+}
+
+const desctop_slider = () => {
+  if(screen_width.value <= 576) return false
+  window.scrollTo(0, 0)
+  const el = [...main.value.children]
+  el.forEach((i, idx) => { i.dataset.index = idx, [3, 5, 7, 9, 11, 13, 15].indexOf(idx) > -1 ? ( i.dataset.scroll = false) : ( i.dataset.scroll = true) }) 
+  const height_el = el[0].offsetHeight
+  const controller = new AbortController()
+  window.addEventListener('wheel', e => wheel_action(e, el, height_el, controller), { signal: controller.signal })
+}
+
+
+
+
+
+
+
+
+
+
+
 const article_observer = () => {
   if(screen_width.value <= 576) return false
   window.scrollTo(0, 0)
@@ -189,7 +226,7 @@ const article_observer = () => {
     setTimeout(() => flag.value = true, 500)
   })
 }
-onMounted(() => article_observer())
+onMounted(() => desctop_slider())
 
 </script>
 
